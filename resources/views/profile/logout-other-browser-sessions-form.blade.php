@@ -4,12 +4,12 @@
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Manage and log out your active sessions on other browsers and devices.') }}
+        {{ __('Kelola dan keluar dari sesi aktif Anda di browser dan perangkat lain..') }}
     </x-slot>
 
     <x-slot name="content">
-        <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-            {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
+        <div class="max-w-xl text-sm text-gray-600  dark:text-white">
+            {{ __('Jika perlu, Anda dapat keluar dari semua sesi browser lainnya di semua perangkat Anda. Beberapa sesi terbaru Anda tercantum di bawah; namun, daftar ini mungkin tidak lengkap. Jika Anda merasa akun Anda telah disusupi, Anda juga harus memperbarui kata sandi Anda.') }}
         </div>
 
         @if (count($this->sessions) > 0)
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="ms-3">
-                            <div class="text-sm text-gray-600 dark:text-gray-400">
+                            <div class="text-sm text-gray-600">
                                 {{ $session->agent->platform() ? $session->agent->platform() : __('Unknown') }} - {{ $session->agent->browser() ? $session->agent->browser() : __('Unknown') }}
                             </div>
 
@@ -51,9 +51,9 @@
             </div>
         @endif
 
-        <div class="flex items-center mt-5">
-            <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
-                {{ __('Log Out Other Browser Sessions') }}
+        <div class="flex items-center  mt-5">
+            <x-button class='dark:bg-yellow-700 dark:text-white'  wire:click="confirmLogout" wire:loading.attr="disabled">
+                {{ __('Keluar dari Sesi Browser Lainnya') }}
             </x-button>
 
             <x-action-message class="ms-3" on="loggedOut">
@@ -64,11 +64,11 @@
         <!-- Log Out Other Devices Confirmation Modal -->
         <x-dialog-modal wire:model.live="confirmingLogout">
             <x-slot name="title">
-                {{ __('Log Out Other Browser Sessions') }}
+                {{ __('Keluar dari Sesi Browser Lainnya') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
+                {{ __('Silakan masukkan kata sandi Anda untuk mengonfirmasi bahwa Anda ingin keluar dari sesi browser Anda yang lain di semua perangkat Anda.') }}
 
                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
                     <x-input type="password" class="mt-1 block w-3/4"
@@ -90,7 +90,7 @@
                 <x-button class="ms-3"
                             wire:click="logoutOtherBrowserSessions"
                             wire:loading.attr="disabled">
-                    {{ __('Log Out Other Browser Sessions') }}
+                    {{ __('Keluar dari Sesi Browser Lainnya') }}
                 </x-button>
             </x-slot>
         </x-dialog-modal>
