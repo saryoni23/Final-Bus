@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('ticket_id');
             $table->bigInteger('price')->nullable();
+            $table->string('kode_bus')->nullable();
             $table->timestamps();
         });
     }

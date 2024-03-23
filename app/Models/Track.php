@@ -11,6 +11,10 @@ class Track extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'form_route',
+        'to_route',
+    ];
     public function tickets()
     {
         return $this->hasMany(Ticket::class);

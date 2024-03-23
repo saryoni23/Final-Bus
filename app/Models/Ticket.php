@@ -16,9 +16,9 @@ class Ticket extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function transpotasi()
+    public function transportasi()
     {
-        return $this->belongsTo(Transpotasi::class);
+        return $this->belongsTo(Transportasi::class);
     }
 
     public function type()
@@ -38,8 +38,8 @@ class Ticket extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['transpotasi_id'] ?? false, function ($query, $transpotasi_id) {
-            return $query->where('transpotasi_id', '=', $transpotasi_id);
+        $query->when($filters['transportasi_id'] ?? false, function ($query, $transportasi_id) {
+            return $query->where('transportasi_id', '=', $transportasi_id);
         });
     }
 }

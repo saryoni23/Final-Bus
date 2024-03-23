@@ -7,6 +7,7 @@
     darkMode = JSON.parse(localStorage.getItem('darkMode'));
     $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,15 +31,13 @@
     <script src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{env('MIDTRANS_CLIENT_KEY')}}"></script>
 
-
-    <!-- Styles -->
     @livewireStyles
 </head>
 
 <body class="font-sans antialiased bg-white dark:bg-gray-800">
-    <x-banner />
-
+    
     @livewire('navigation-menu')
+
 
 
     <!-- Page Heading -->
