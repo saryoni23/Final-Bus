@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MethodController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PayController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TrackController;
@@ -37,11 +38,14 @@ Route::get('/destination', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
         //  Airline Route
     Route::resource('/transportasi', TransportasiController::class)->middleware(['auth', 'verified', 'can:isAdmin']);
@@ -58,7 +62,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/complaints', ComplaintController::class)->middleware(['auth', 'verified']);
     
     //  Dashboard Route
-    // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified']);
     
     //  Order Route
     Route::resource('/orders', OrderController::class)->middleware(['auth', 'verified']);
@@ -89,4 +93,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 });
 
 
-Route::get('rute',      RuteIndex::class)->name('rute');
+Route::resource('/pay', PayController::class)->middleware(['auth', 'verified']);
+
+// Route::post('/midtrans-callback', [PayController::class, 'callback']);
+
+
+Route::get('/pay1/{id}', [TransactionController::class,'pay1'])->middleware(['auth', 'verified']);
+
+
+

@@ -23,19 +23,23 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
+    <!-- <script src="{{ asset('build/assets/app-D2jpX1vH.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DfZ-n7cB.css') }}"> -->
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
         integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="{{env('MIDTRANS_CLIENT_KEY')}}"></script>
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{config('midtrans.client.key')}}"></script>
+
 
     @livewireStyles
 </head>
 
 <body class="font-sans antialiased bg-white dark:bg-gray-800">
-    
+
     @livewire('navigation-menu')
 
 

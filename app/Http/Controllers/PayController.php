@@ -11,12 +11,13 @@ use App\Models\Passenger;
 use App\Models\Ticket;
 use App\Models\Transaction;
 use App\Models\Complaint;
-
+use App\Models\Pay;
+use App\Models\Price;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 
-class OrderController extends Controller
+class PayController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,12 +27,12 @@ class OrderController extends Controller
     public function index()
     {
         if (Gate::allows('isAdmin')) {
-            return view('dashboard.order.index', [
+            return view('dashboard.order1.index', [
                 'orders' => Order::all(),
                 'complaints' => Complaint::all()
             ]);
         } else {
-            return view('dashboard.order.index', [
+            return view('dashboard.order1.index', [
                 'orders' => Order::where('user_id', Auth::id())->get(),
                 'complaints' => Complaint::all(),
             ]);
@@ -45,7 +46,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view("dashboard.order.create", [
+        return view("dashboard.order1.create", [
             "routes" => Track::all(),
             'transportasis' => Transportasi::all(),
             'types' => Type::all(),
@@ -126,26 +127,86 @@ class OrderController extends Controller
 
         $validatedDataOrder['ticket_id'] = Ticket::where('transportasi_id', $transportasi_id)->where('type_id', $type_id)->where('track_id', $track_id)->first()->id;
 
+        // $tiket['ticket_id'] = Price::where('ticket_id', $ticket_id);
+
+        $price['ticket_id'] = Ticket::where('transportasi_id', $transportasi_id)->where('type_id', $type_id)->where('track_id', $track_id)->first()->id;
+
+
         Order::create($validatedDataOrder);
+        // $order1 = Order::where('order_code', $order_code1)->first();
+
+        // $prices = Price::all();
+        // Mendapatkan data harga berdasarkan kondisi tertentu
+        // $specificPrice = Price::where('ticket_id', $price)->first();
+        $order1 = Order::where('order_code', $order_code1)->first();
+        $validatedDataTransaction['order_id'] = $order1->id;
+        $validatedDataTransaction['status'] = 'unpaid';
+        $validatedDataTransaction['total'] = $order1->ticket->price->price * $validatedDataOrder['amount'];
+        // $validatedDataTransaction['total'] = [$specificPrice['price']* $validatedDataOrder['amount']];
+
+
+        /*Install Midtrans PHP Library (https://github.com/Midtrans/midtrans-php)
+        composer require midtrans/midtrans-php
+                                    
+        Alternatively, if you are not using **Composer**, you can download midtrans-php library 
+        (https://github.com/Midtrans/midtrans-php/archive/master.zip), and then require 
+        the file manually.   
+
+        require_once dirname(__FILE__) . '/pathofproject/Midtrans.php'; */
+
+        //SAMPLE REQUEST START HERE
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $order1->id,
+                'gross_amount' => $order1->ticket->price->price * $validatedDataOrder['amount'],
+            ),
+            'customer_details' => array(
+                'name'  => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'phone' => Auth::user()->no_hp,
+            ),
+        );
+
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $pay = $validatedDataTransaction;
+        // dd($pay);
+        Pay::create($pay);
+        return view('dashboard.order1.view', compact('snapToken','pay'));
+
+        // dd($validatedDataOrder,$validatedDataTransaction,$request);
+
+        // Pay::create($validatedDataTransaction);
+
 
         // Transaction 1
 
         // $validatedDataTransaction = $request->validate([
-        //     'method_id' => ['required'],
-        //     'name_account' => ['required'],
-        //     'from_account' => ['required']
+        //     // 'method_id' => ['required'],
+        //     //     'name_account' => ['required'],
+        //     //     'from_account' => ['required']
         // ]);
 
-        $order1 = Order::where('order_code', $order_code1)->first();
+        // $order1 = Order::where('order_code', $order_code1)->first();
 
-        $validatedDataTransaction['order_id'] = $order1->id;
+        // $validatedDataTransaction['order_id'] = $order1->id;
 
-        $validatedDataTransaction['total'] = $order1->ticket->price->price * $validatedDataOrder['amount'];
+        // $validatedDataTransaction['total'] = $order1->ticket->price->price * $validatedDataOrder['amount'];
 
-        $validatedDataTransaction['status'] = 'unpaid';
+        // $validatedDataTransaction['status'] = false;
 
-        // dd($validatedDataTransaction);
-        Transaction::create($validatedDataTransaction);
+        // Transaction::create($validatedDataTransaction);
+
 
         sleep(1);
 
@@ -181,11 +242,11 @@ class OrderController extends Controller
 
             Order::create($validatedDataOrder2);
 
-            // $validatedDataTransaction2 = $request->validate([
-            //     'method_id' => ['required'],
-            //     'name_account' => ['required'],
-            //     'from_account' => ['required']
-            // ]);
+            $validatedDataTransaction2 = $request->validate([
+                'method_id' => ['required'],
+                //     'name_account' => ['required'],
+                //     'from_account' => ['required']
+            ]);
 
             $order2 = Order::where('order_code', $order_code2)->first();
 
@@ -345,7 +406,8 @@ class OrderController extends Controller
             };
         }
 
-        return redirect('/transactions')->with('success', 'Pesanan berhasil ditambahkan!');
+        // return redirect('/transactions')->with('success', 'Pesanan berhasil ditambahkan!');
+        return dd($request->all());
     }
 
     /**
@@ -452,4 +514,6 @@ class OrderController extends Controller
         // Return JSON
         return response()->json(['price' => $price]);
     }
+
+
 }

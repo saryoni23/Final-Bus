@@ -281,9 +281,7 @@ $routeTo = array_unique($routeTo);
                                             <div class="form-group row">
                                                 <div class="col-lg-2 col-sm-12 align-items-start mb-2">
                                                     <button type="button" class="btn btn-primary"
-                                                        id="checkTicketButton">Cek
-                                                        Harga
-                                                        Tiket Berangkat</button>
+                                                        id="checkTicketButton">Cek Harga Tiket Berangkat</button>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-12">
                                                     <div class="form-group">
@@ -509,7 +507,7 @@ $routeTo = array_unique($routeTo);
                                                 </div>
                                             </div>
 
-                                            <h4>Data Pembayaran</h4>
+                                            <!-- <h4>Data Pembayaran</h4>
 
                                             <div class="form-group row">
                                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Metode
@@ -555,12 +553,24 @@ $routeTo = array_unique($routeTo);
                                                         <small class="text-muted">Nomor lengkap pada rekening</small>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group row">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
+
+                                            <!-- <label for="inputEmail3" class="col-sm-1 col-form-label">Jumlah
+                                                :</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="jumlah-penumpang" name="amount">
+                                                    <option value= selected>bayar </option>
+                                                    <option value= selected>bayar diloket</option>
+
+                                            
+                                                </select>
+                                            </div> -->
                                         </div>
+
                                     </form>
                                     <!-- /.card-body -->
                                 </div>

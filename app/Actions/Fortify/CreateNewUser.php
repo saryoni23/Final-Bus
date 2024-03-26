@@ -26,7 +26,16 @@ class CreateNewUser implements CreatesNewUsers
             'tgllahir'  => ['required', 'date'],
             'password'  => $this->passwordRules(),
             'terms'     => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ])->validate();
+        ],[
+            'name.required'     =>  'Full Name Wajib Diisi',
+            'name.min'          =>  'Full Name Minimal 5 Karakter',
+            'tgllahir.required'     =>  'Tanggal Lahir Wajib Diisi',
+            'email.required'        =>  'Email Wajib Diisi',
+            'email.unique:users'    =>  'Email Sudah Terdaftar',
+            'email.unique'    =>  'Email Sudah Terdaftar',
+            'password.required'     =>  'Password Wajib Diisi',
+            'password.min'          =>  'Password Minimal 6 Karakter',
+            ])->validate();
 
         return User::create([
             'name'      => $input['name'],

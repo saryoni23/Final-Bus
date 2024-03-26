@@ -45,12 +45,12 @@ class TypeController extends Controller
         $check = Type::where('name', $validatedData['name'])->where('name', $validatedData['name'])->first();
 
         if ($check) {
-            return redirect('/types')->with('sameType', 'Kelas maskapai tersebut sudah ada di database!');
+            return redirect('/types')->with('sameType', 'Kelas transportasi tersebut sudah ada di database!');
         }
 
         Type::create($validatedData);
 
-        return redirect('/types')->with('store', "Kelas Maskapai berhasil ditambahkan");
+        return redirect('/types')->with('store', "Kelas transportasi berhasil ditambahkan");
     }
 
     /**
@@ -92,12 +92,12 @@ class TypeController extends Controller
         $check = Type::where('id', '!=', $type->id)->where('name', $validatedData['name'])->first();
 
         if ($check) {
-            return redirect('/types')->with('sameType', 'Kelas maskapai tersebut sudah ada di database!');
+            return redirect('/types')->with('sameType', 'Kelas transportasi tersebut sudah ada di database!');
         }
 
         $type->update($validatedData);
 
-        return redirect('/types')->with('update', "Kelas Maskapai berhasil diubah");
+        return redirect('/types')->with('update', "Kelas transportasi berhasil diubah");
     }
 
     /**

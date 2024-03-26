@@ -49,7 +49,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //
     }
 
     /**
@@ -60,7 +60,10 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+
+        // return dd($transaction);
+        // $transaction = Transaction::findOrFail($id);
+        // return view('dashboard.transaction.view', compact('transactions'));
     }
 
     /**
@@ -128,4 +131,55 @@ class TransactionController extends Controller
     {
         //
     }
+    public function pay1($id)
+    {
+            /*Install Midtrans PHP Library (https://github.com/Midtrans/midtrans-php)
+        composer require midtrans/midtrans-php
+                                    
+        Alternatively, if you are not using **Composer**, you can download midtrans-php library 
+        (https://github.com/Midtrans/midtrans-php/archive/master.zip), and then require 
+        the file manually.   
+
+        require_once dirname(__FILE__) . '/pathofproject/Midtrans.php'; */
+
+        //SAMPLE REQUEST START HERE
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $transaction = Transaction::findOrFail($id);
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $transaction->order_id ,
+                'gross_amount' => $transaction->total,
+            ),
+            'customer_details' => array(
+                'name'  => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'phone' => Auth::user()->no_hp,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        return view('dashboard.transaction.view', ['snapToken'=>$snapToken,'transaction' => $transaction]);
+
+        
+    }
+    public function callback(Request $request){
+        $serverKey   = config('midtrans.server_key');
+        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        if($hashed== $request->signature_key){
+            if($request->transaction_status == 'capture'){
+                $order = Transaction::find($request->order_id);
+                $order->update(['status'=>'Paid']);
+            }
+        }
+    }
 }
+

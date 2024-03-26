@@ -199,7 +199,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Transportasi</th>   
+                                                    <!-- <th>Transportasi</th>    -->
                                                     <th>Kode Bus</th>   
                                                     <th>Pergi dari</th>
                                                     <th>Tujuan ke</th>
@@ -216,13 +216,13 @@
                                                     <td>
                                                         {{ $loop->iteration }}
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         @isset($ticket->transportasis->name)
                                                         {{ $ticket->transportasi->name }}
                                                         @else
                                                         Tidak dapat ditampilkan
                                                         @endisset
-                                                    </td>
+                                                    </td> -->
                                                     <td>
                                                         @isset($ticket->price->kode_bus)
                                                          {{ $ticket->price->kode_bus }}

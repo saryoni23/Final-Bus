@@ -1,10 +1,13 @@
 @extends('layouts.front')
 
 @section('front')
+<a href="/orders">Kembali</a>
 <div class="wrapper">
+   
     <!-- Main content -->
     <section class="invoice" style="margin: 30px; border: none">
         <!-- title row -->
+        
         <div class="row">
             <div class="col-12">
                 <h2 class="page-header">
@@ -127,6 +130,7 @@
     </section>
     <!-- /.content -->
 </div>
+
 <!-- ./wrapper -->
 @endsection
 

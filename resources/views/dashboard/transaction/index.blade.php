@@ -44,12 +44,12 @@
                                                 <tr>
                                                     <th>ID Booking</th>
                                                     <th>Nama</th>
-                                                    <th>Metode Pembayaran</th>
+                                                    <!-- <th>Metode Pembayaran</th>
                                                     <th>Nama Akun Rekening</th>
                                                     <th>Nomor Rekening Pelanggan</th>
-                                                    <th>Nomor Rekening Tujuan</th>
+                                                    <th>Nomor Rekening Tujuan</th> -->
                                                     <th>Total Pembayaran</th>
-                                                    <th>Bukti Pembayaran</th>
+                                                    <!-- <th>Bukti Pembayaran</th> -->
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -70,7 +70,7 @@
                                                         {{ $transaction->order->user->name }}
                                                         @endisset
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         @isset($transaction->method->method)
                                                         {{ $transaction->method->method }}
                                                         @endisset
@@ -84,19 +84,19 @@
                                                         @isset($transaction->from_account)
                                                         {{ $transaction->from_account }}
                                                         @endisset
-                                                    </td>
-                                                    <td>
+                                                    </td> -->
+                                                    <!-- <td>
                                                         @isset($transaction->method->target_account)
                                                         {{ $transaction->method->target_account }}
                                                         @endisset
-                                                    </td>
+                                                    </td> -->
 
                                                     <td>
                                                         @isset($transaction->total)
                                                         {{ $transaction->total }}
                                                         @endisset
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         @isset($transaction->image)
                                                         <img style="width: 100px; height: 50px"
                                                             src="{{ asset($transaction->image) }}"
@@ -106,12 +106,12 @@
                                                         @else
                                                         Belum diunggah
                                                         @endisset
-                                                    </td>
+                                                    </td> -->
                                                     <td>
-                                                        @if ($transaction->status == true)
-                                                        Telah disetujui
+                                                        @if ($transaction->status == 'unpaid')
+                                                        Belum Bayar
                                                         @else
-                                                        Belum/tidak disetujui
+                                                        Sudah Bayar
                                                         @endif
                                                     </td>
                                                     <td>
@@ -121,10 +121,17 @@
                                                             Status
                                                         </button>
                                                         @else
-                                                        <button class="btn btn-primary btn-xs" type="button" data-toggle="modal"
+                                                        <!-- <button class="btn btn-primary btn-xs" type="button" data-toggle="modal"
                                                             data-target="#modal-upload-{{ $transaction->id }}">Unggah
                                                             Bukti Pembayaran
-                                                        </button>
+                                                        </button> -->
+                                                        @if ($transaction->status == 'unpaid')
+                                                        <a href='pay1/{{$transaction->id }}''>bayar
+                                                        </a>
+                                                        @else
+                                                        Sudah Bayar
+                                                        @endif
+                                                       
                                                         @endcan
                                                     </td>
 
@@ -273,6 +280,7 @@
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title">Unggah Bukti Pembayaran
                                                                     </h4>
+                                                                   
                                                                     <button type="button" class="close" data-dismiss="modal"
                                                                         aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -292,7 +300,7 @@
                                                                         </div>
                                                                         @endisset
 
-                                                                        <div class="form-group row">
+                                                                        <!-- <div class="form-group row">
                                                                             <div class="col-sm-12">
                                                                                 <div class="form-group row">
                                                                                     <div class="col-sm-12">
@@ -316,7 +324,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> -->
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
                                                                         <button type="submit" class="btn btn-primary">Save</button>

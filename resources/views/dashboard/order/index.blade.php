@@ -91,8 +91,8 @@
 
                                                     </td>
                                                     <td>
-                                                        @isset($order->ticket->airline->name)
-                                                        {{ $order->ticket->airline->name }}
+                                                        @isset($order->ticket->transportasi->name)
+                                                        {{ $order->ticket->transportasi->name }}
                                                         @else
                                                         Tidak dapat ditampilkan
                                                         @endisset
@@ -148,7 +148,7 @@
                                                                 type="button">Cetak</button>
                                                         </a>
                                                         @else
-                                                        @if ($order->transaction->status == true)
+                                                        @if ($order->transaction->status == 'paid')
                                                         <a href="/print?order={{ $order->order_code }}" target="_blank">
                                                             <button class="btn btn-success btn-xs"
                                                                 type="button">Cetak</button>

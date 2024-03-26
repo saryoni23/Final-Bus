@@ -187,7 +187,7 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-2 col-form-label">Jam
                                                                                 Berangkat</label>
-                                                                            <input type="text"
+                                                                            <input type="date"
                                                                                 class="col-sm-10 form-control"
                                                                                 name="flight_at"
                                                                                 placeholder="Masukkan Jam Berangkat (HH:MM:SS)"
