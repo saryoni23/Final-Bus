@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     // })->name('dashboard');
 
         //  Airline Route
-    Route::resource('/transportasi', TransportasiController::class)->middleware(['auth', 'verified', 'can:isAdmin']);
+    Route::resource('/transportasi', TransportasiController::class)->middleware(['auth', 'verified', 'can:isAdmin','can:isKaryawan']);
     
     //  Type Route
     Route::resource('/types', TypeController::class)->middleware(['auth', 'verified', 'can:isAdmin']);
@@ -83,7 +83,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/prices', PriceController::class)->middleware(['auth', 'verified']);
 
     //  Method Route
-    Route::resource('/methods', MethodController::class)->middleware(['auth', 'verified', 'can:isAdmin']);
+    Route::resource('/methods', MethodController::class)->middleware(['auth', 'verified', 'can:isAdmin','can:isKaryawan']);
 
     //  User Route
     Route::resource('/users', UserController::class)->middleware(['auth', 'verified']);
@@ -93,12 +93,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 });
 
 
-Route::resource('/pay', PayController::class)->middleware(['auth', 'verified']);
+// Route::resource('/pay', PayController::class)->middleware(['auth', 'verified']);
 
 // Route::post('/midtrans-callback', [PayController::class, 'callback']);
 
 
 Route::get('/pay1/{id}', [TransactionController::class,'pay1'])->middleware(['auth', 'verified']);
+
+
+
+Route::post('/uprole/{id}',     [UserController::class, 'uprole']);
+Route::post('/downrole/{id}',     [UserController::class, 'downrole']);
 
 
 

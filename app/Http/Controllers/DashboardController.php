@@ -22,6 +22,13 @@ class DashboardController extends Controller
                 'transactions' => Transaction::where('status', false),
                 'complaints' => Complaint::where('seen', false)
             ]);
+        } elseif (Gate::allows('isKaryawan')) {
+            return view('dashboard.index', [
+                'tickets' => Ticket::all(),
+                'orders' => Order::all(),
+                'transactions' => Transaction::where('status', false)->get(),
+                'complaints' => Complaint::where('seenForKaryawan', false)->get(),
+            ]);
         } else {
             return view('dashboard.index', [
                 'tickets' => Ticket::all(),
@@ -33,6 +40,7 @@ class DashboardController extends Controller
                     $query->where('user_id', Auth::id());
                 })->get(),
             ]);
+        
         }
     }
 }

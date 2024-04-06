@@ -59,18 +59,29 @@
             <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
             <x-input-error for="name" class="mt-2" />
         </div>
-        <!-- Name -->
+        <!-- Tanggal Lahir -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="tgllahir" value="{{ __('Tanggal Lahir') }}" />
             <x-input id="tgllahir" type="date" class="mt-1 block w-full" wire:model="state.tgllahir" required autocomplete="tgllahir" />
             <x-input-error for="tgllahir" class="mt-2" />
         </div>
-        <!-- Name -->
+        <!-- Jenis Kelamin -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="gender" value="{{ __('Jenis Kelamin') }}" />
+            <x-select wire:model="state.gender" required autocomplete="gender">
+                <option value=""></option>
+                <option value="laki-laki">Laki-Laki</option>
+                <option value="perempuan">Perempuan</option>
+            </x-select>
+            <x-input-error for="gender" class="mt-2" />
+        </div>
+        <!-- No Telepon -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="no_hp" value="{{ __('No Telepon') }}" />
             <x-input id="no_hp" type="text" class="mt-1 block w-full" wire:model="state.no_hp" required autocomplete="no_hp" />
             <x-input-error for="no_hp" class="mt-2" />
         </div>
+
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">

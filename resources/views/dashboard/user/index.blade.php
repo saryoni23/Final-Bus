@@ -1,9 +1,8 @@
-@extends('layouts.front')
-
 <x-app-layout>
+    @extends('layouts.front')
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 content-wrapper">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 content-wrapper">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <!-- Content Wrapper. Contains page content -->
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
@@ -86,135 +85,128 @@
 
                                                     </td>
                                                     <td>
-                                                        @if ($user->gender == 1)
-                                                        Laki-laki
-                                                        @elseif($user->gender == 0)
-                                                        Perempuan
-                                                        @else
-                                                        belum di set
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @isset($user->profile_photo_path)
-                                                        <img style="width: 100px; height: 100px"
-                                                            src="{{ asset($user->profile_photo_path) }}" alt="{{ $user->name }}">
+                                                        @isset($user->gender)
+                                                        {{ $user->gender }}
                                                         @else
                                                         Belum di set
                                                         @endisset
-
+                                                    </td>
+                                                    <td>
+                                                        @isset($user->profile_photo_path)
+                                                        <img class="h-10 w-10 rounded-full object-cover"
+                                                            src="{{ $user->profile_photo_url }}"
+                                                            alt="{{ $user->name }}" />
+                                                        @else
+                                                        Belum di set
+                                                        @endisset
                                                     </td>
                                                     <td>
                                                         @isset($user->role)
                                                         {{ $user->role }}
                                                         @endisset
                                                     </td>
-                                                    <td>
-
-                                                        <button class="btn btn-primary btn-xs" type="button"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-user-{{ $user->id }}">Ubah
-                                                        </button>
-
-                                                        <form action="/users/{{ $user->id }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger btn-xs"
-                                                                type="submit">Hapus</button>
-                                                        </form>
+                                                    <td class="p-4 space-x-2 whitespace-nowrap max-w-sm">
+                                                        <div
+                                                            class="text-sm text-gray-900 dark:text-white h-full inline-flex justify-between items-baseline space-x-2">
+                                                            <!-- Tampilkan peran pengguna -->
+                                                            <span
+                                                                class="text-xs bg-gray-200 text-gray-800 px-2 py-1 rounded-md">{{ $user->role }}</span>
+                    
+                                                            <!-- Tampilkan tombol Edit, Hapus, Up, dan Down sesuai dengan peran pengguna -->
+                                                            @if($user->role == 'admin')
+                                                            <!-- Jika peran adalah admin, tidak ada tombol -->
+                                                            <div
+                                                                class="text-sm text-gray-900 dark:text-white h-full inline-flex justify-between items-baseline space-x-2">
+                                                                <span class="text-sm font-medium text-gray-500">Tidak ada aksi yang
+                                                                    tersedia</span>
+                                                            </div>
+                                                            @elseif($user->role == 'karyawan')
+                                                            <!-- Jika peran adalah karyawan, tampilkan tombol Edit, Hapus, dan Down -->
+                                                            <div
+                                                                class="text-sm text-gray-900 dark:text-white h-full inline-flex justify-between items-baseline space-x-2">
+                                                                
+                                                                <form onsubmit="return confirmHapus(event)"
+                                                                    action="/users/{{ $user->id }}" method="POST">
+                                                                    @csrf @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                        HAPUS
+                                                                    </button>
+                                                                </form>
+                                                                <form id="form-downrole-{{ $user->id }}" action="/downrole/{{ $user->id }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <button type="button" onclick="confirmDown({{ $user->id }})"
+                                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                                                                        <svg class="w-4 h-4 text-gray-800 dark:text-white"
+                                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24">
+                                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="m16 7-4 4-4-4m8 6-4 4-4-4" />
+                                                                        </svg>
+                                                                        Down
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                            @else
+                                                            <!-- Jika peran adalah user, tampilkan tombol Up, Edit, dan Hapus -->
+                                                            <div
+                                                                class="text-sm text-gray-900 dark:text-white h-full inline-flex justify-between items-baseline space-x-2">
+                                                                <form id="form-uprole-{{ $user->id }}" action="/uprole/{{ $user->id }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <button type="button" onclick="confirmUp({{$user->id}})"
+                                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-600 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900">
+                                                                        <svg class="w-4 h-4 text-gray-800 dark:text-white"
+                                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24">
+                                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="m16 17-4-4-4 4m8-6-4-4-4 4" />
+                                                                        </svg>
+                                                                        Up
+                                                                    </button>
+                                                                </form>
+                    
+                                                                <a href="{{$user->id }}"
+                                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                                                        </path>
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>EDIT</a>
+                    
+                                                                <form onsubmit="return confirmHapus(event)"
+                                                                    action="/users/{{  $user->id }}" method="POST">
+                                                                    @csrf @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                        HAPUS
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                            @endif
+                                                        </div>
                                                     </td>
 
 
-                                                    <div class="modal fade" id="modal-user-{{ $user->id }}">
-                                                        <div class="modal-dialog modal-lg">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title">Form Ubah Data User</h4>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-
-                                                                <form action="/users/{{ $user->id }}" method="POST"
-                                                                    enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    @method('PUT')
-
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group row">
-                                                                            <label for="name"
-                                                                                class="col-sm-2 col-form-label">Nama:</label>
-                                                                            <input type="text" class="form-control1"
-                                                                                value="{{ old('name', $user->name) }}"
-                                                                                name="name" required>
-                                                                        </div>
-
-                                                                        <div class="form-group row">
-                                                                            <label for="email"
-                                                                                class="col-sm-2 col-form-label">Email:</label>
-                                                                            <input type="email" class="form-control1"
-                                                                                value="{{ old('email', $user->email) }}"
-                                                                                disabled>
-                                                                        </div>
-
-                                                                        <div class="form-group row">
-                                                                            <label for="phone_number"
-                                                                                class="col-sm-2 col-form-label">Nomor
-                                                                                Telepon:</label>
-                                                                            <input type="text" class="form-control1"
-                                                                                value="{{ old('no_hp', $user->no_hp) }}"
-                                                                                name="no_hp" required>
-                                                                        </div>
-
-                                                                        <div class="form-group row">
-                                                                            <label for="gender"
-                                                                                class="col-sm-2 col-form-label">Jenis:</label>
-                                                                            <select name="gender" id="gender"
-                                                                                class="form-control1" required>
-                                                                                <option selected value="" disabled>
-                                                                                    Pilih Jenis
-                                                                                </option>
-                                                                                @if ($user->gender == 1)
-                                                                                <option value=1 selected>
-                                                                                    Laki-laki
-                                                                                </option>
-                                                                                <option value=0>
-                                                                                    Perempuan
-                                                                                </option>
-                                                                                @elseif ($user->gender == 0)
-                                                                                <option value=1>
-                                                                                    Laki-laki
-                                                                                </option>
-                                                                                <option value=0 selected>
-                                                                                    Perempuan
-                                                                                </option>
-                                                                                @else
-                                                                                <option value=1>
-                                                                                    Laki-laki
-                                                                                </option>
-                                                                                <option value=0>
-                                                                                    Perempuan
-                                                                                </option>
-                                                                                @endif
-
-                                                                            </select>
-                                                                        </div>
-
-
-
-                                                                    </div>
-
-
-                                                                    <div class="modal-footer">
-
-                                                                        <input type="submit" class="btn btn-success" />
-
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
                                                 </tr>
                                                 @endforeach
 
@@ -237,5 +229,64 @@
         </div>
     </div>
 
+    <script>
+        function confirmHapus(event) {
+            event.preventDefault(); // Menghentikan form dari pengiriman langsung
+
+            Swal.fire({
+                title: 'Yakin Hapus Data?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                theme: 'dark',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+            }).then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    event.target.submit(); // Melanjutkan pengiriman form
+                } else {
+                    swal('Your imaginary file is safe!');
+                }
+            });
+        }
+
+        function confirmUp(itemId) {
+            Swal.fire({
+                title: 'Yakin ingin Mengangkat User Menjadi Karyawan?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('form-uprole-' + itemId)
+                        .submit(); // Submit form jika pengguna menekan "Ya"
+                }
+            });
+        }
+
+        function confirmDown(itemId) {
+        Swal.fire({
+            title: 'Yakin ingin Menurunkan Karyawan Menjadi Customer?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('form-downrole-' + itemId)
+                    .submit(); // Submit form jika pengguna menekan "Ya"
+            }
+        });
+    }
+
+
+    </script>
 
 </x-app-layout>

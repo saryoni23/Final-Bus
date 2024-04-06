@@ -11,12 +11,12 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Rute Transportasi</h1>
+                                <h1>Halaman {{ (Auth::user()->role)}} </h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                    <li class="breadcrumb-item active">Rute Transportasi</li>
+                                    <li class="breadcrumb-item active">Halaman {{ (Auth::user()->role)}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -56,7 +56,79 @@
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Klik untuk melihat daftar pesanan <i
+                                    <a href="" class="small-box-footer">Klik untuk melihat daftar pesanan <i
+                                            class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <h3>Transaksi</h3>
+
+                                        <p>Terdapat {{ $transactions->count() }} yang belum di konfirmasi/setujui
+                                        </p>
+                                        <br>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-person-add"></i>
+                                    </div>
+                                    <a href="/transactions" class="small-box-footer">Klik untuk melihat daftar
+                                        transaksi <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-danger">
+                                    <div class="inner">
+                                        <h3>Keluhan</h3>
+
+                                        <p>Terdapat {{ $complaints->count() }} keluhan/obrolan yang belum ditanggapi
+                                        </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-pie-graph"></i>
+                                    </div>
+                                    <a href="/orders" class="small-box-footer">Klik untuk melihat daftar keluhan <i
+                                            class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <!-- /.card-body -->
+                        </div>
+                        @endcan
+                        @can('isKaryawan')
+                        <div class="row">
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Tiket</h3>
+                                        <p>{{ $tickets->count() }} tiket telah terdaftar!</p>
+                                        <br>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-bag"></i>
+                                    </div>
+                                    <a href="/tickets" class="small-box-footer">Klik untuk melihat daftar harga
+                                        tiket <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3>Pesanan</h3>
+                                        <p>Terdapat pesanan lebih dari {{ $orders->count() - 1 }}</p>
+                                        <br>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+                                    <a href="/orders" class="small-box-footer">Klik untuk melihat daftar pesanan <i
                                             class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -107,14 +179,14 @@
                                     <div class="inner">
                                         <h3>Pesanan</h3>
 
-                                        <p>Ayo, pesan tiket pesawat mu sekarang!</p>
+                                        <p>Ayo, pesan tiket bus mu sekarang!</p>
                                         <br>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
                                     <a href="/orders/create" class="small-box-footer">Klik untuk memesan tiket
-                                        pesawat <i class="fas fa-arrow-circle-right"></i></a>
+                                        bus <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <!-- ./col -->
@@ -213,16 +285,7 @@
     <!-- Page specific script -->
     <script>
         $(function () {
-            /* ChartJS
-             * -------
-             * Here we will create a few charts using ChartJS
-             */
-
-            //--------------
-            //- AREA CHART -
-            //--------------
-
-            // Get context with jQuery - using jQuery's .get() method.
+          
             var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
 
             var areaChartData = {

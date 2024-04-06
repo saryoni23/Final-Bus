@@ -60,11 +60,17 @@
                                                     <th>ID Booking</th>
                                                     <th>Nama</th>
                                                     <th>Transportasi</th>
-                                                    <th>Jenis</th>
+                                                    <th>Kelas Transportasi</th>
                                                     <th>Rute</th>
-                                                    <th>Jumlah</th>
-                                                    <th>Pulang-Pergi</th>
+                                                    <th>Jumlah Tiket</th>
+                                                    <!-- <th>Pulang-Pergi</th> -->
                                                     <th>Tanggal</th>
+                                                    @can('isAdmin')
+                                                    <th>Wa</th>
+                                                    @endcan
+                                                    @can('isKaryawan')
+                                                    <th>Wa</th>
+                                                    @endcan
                                                     <th>Action</th>
                                                 </tr>
 
@@ -125,14 +131,14 @@
                                                         @endisset
 
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         @isset($order->round_trip)
-                                                        Ya
-                                                        @else
                                                         Tidak
+                                                        @else
+                                                        Ya
                                                         @endisset
 
-                                                    </td>
+                                                    </td> -->
                                                     <td>
                                                         @isset($order->updated_at)
                                                         {{ $order->updated_at }}
@@ -141,16 +147,36 @@
                                                         @endisset
 
                                                     </td>
+                                                    @can('isAdmin')
                                                     <td>
+
+                                                        <a href="https://wa.me/62{{ $order->user->no_hp}}"
+                                                            target="_blank">
+                                                            <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900"
+                                                                type="button">Wa</button>
+                                                        </a>
+                                                    </td>
+                                                    @endcan
+                                                    @can('isKaryawan')
+                                                    <td>
+
+                                                        <a href="https://wa.me/62{{ $order->user->no_hp}}"
+                                                            target="_blank">
+                                                            <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900"
+                                                                type="button">Wa</button>
+                                                        </a>
+                                                    </td>
+                                                    @endcan
+                                                    <td class='flex-row space-y-3 items-center'>
                                                         @can('isAdmin')
                                                         <a href="/print?order={{ $order->order_code }}" target="_blank">
-                                                            <button class="btn btn-success btn-xs"
+                                                            <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
                                                                 type="button">Cetak</button>
                                                         </a>
                                                         @else
                                                         @if ($order->transaction->status == 'paid')
                                                         <a href="/print?order={{ $order->order_code }}" target="_blank">
-                                                            <button class="btn btn-success btn-xs"
+                                                            <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
                                                                 type="button">Cetak</button>
                                                         </a>
                                                         @endif
@@ -158,11 +184,18 @@
 
                                                         @can('isCustomer')
                                                         @if ($order->transaction->status == false)
-                                                        <form action="orders/{{ $order->id }}" method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus?');">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger btn-xs" type="submit">
+                                                        <form onsubmit="return confirmHapus(event)"
+                                                            action="orders/{{ $order->id }}" method="POST">
+                                                            @csrf @method('DELETE')
+                                                            <button type="submit"
+                                                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                                <svg class="w-4 h-4 mr-2" fill="currentColor"
+                                                                    viewBox="0 0 20 20"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                        clip-rule="evenodd"></path>
+                                                                </svg>
                                                                 @can('is_admin')
                                                                 Hapus
                                                                 @else
@@ -172,11 +205,18 @@
                                                         </form>
                                                         @endif
                                                         @else
-                                                        <form action="orders/{{ $order->id }}" method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus?');">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger btn-xs" type="submit">
+                                                        <form onsubmit="return confirmHapus(event)"
+                                                            action="orders/{{ $order->id }}" method="POST">
+                                                            @csrf @method('DELETE')
+                                                            <button type="submit"
+                                                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                                <svg class="w-4 h-4 mr-2" fill="currentColor"
+                                                                    viewBox="0 0 20 20"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                        clip-rule="evenodd"></path>
+                                                                </svg>
                                                                 @can('is_admin')
                                                                 Hapus
                                                                 @else
@@ -187,7 +227,7 @@
                                                         @endcan
 
 
-                                                        <button class="btn btn-warning btn-xs position-relative"
+                                                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
                                                             type="button" data-toggle="modal"
                                                             data-target="#modal-lapor-{{ $order->id }}"
                                                             id="button-{{ $order->id }}">Lapor
@@ -229,12 +269,12 @@
                                                                     <div class="modal-body d-flex flex-column">
                                                                         @foreach ($order->complaints as $complaint)
                                                                         <div
-                                                                            class="d-flex flex-row align-items-center mb-2 @if ($complaint->user->id == Auth::id()) justify-content-end @endif">
-                                                                            <img src="{{ asset($complaint->user->image) }}"
+                                                                            class="d-flex flex-row align-items-center mb-2 
+                                                                            @if ($complaint->user->id == Auth::id()) justify-content-end @endif">
+                                                                            <!-- <img src="{{ $complaint->user->profile_photo_path }}"
                                                                                 alt="{{ $complaint->user->name }}"
                                                                                 style="max-width: 30px; max-height: 30px"
-                                                                                class="rounded-circle mx-2">
-
+                                                                                class="rounded-circle mx-2"> -->
                                                                             <label class="my-1">{{
                                                                                 $complaint->user->name }}</label>
                                                                         </div>
@@ -289,4 +329,27 @@
             <!-- /.content-wrapper -->
         </div>
     </div>
+    <script>
+        function confirmHapus(event) {
+            event.preventDefault(); // Menghentikan form dari pengiriman langsung
+
+            Swal.fire({
+                title: 'Yakin Hapus Data?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                theme: 'dark',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+            }).then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    event.target.submit(); // Melanjutkan pengiriman form
+                } else {
+                    swal('Your imaginary file is safe!');
+                }
+            });
+        }
+    </script>
 </x-app-layout>

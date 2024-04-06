@@ -27,7 +27,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased bg-white dark:bg-gray-800" >
+    <body class="font-sans antialiased bg-white " >
         <x-banner />
 
             @livewire('navigation-menu')

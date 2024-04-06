@@ -48,7 +48,12 @@ class ComplaintController extends Controller
 
         if (Gate::allows('isAdmin')) {
             Complaint::where('order_id', $request['order_id'])->update(['seen' => 1]);
-        } else {
+        }elseif (Gate::allows('isKaryawan')) {
+            $complaint = Complaint::where('order_id', $request['order_id'])->first();
+            if ($complaint) {
+                $complaint->update(['seenForKaryawan' => 1]);
+            }
+        }else {
             Complaint::where('order_id', $request['order_id'])->update(['seenForAdmin' => 1]);
         }
 

@@ -44,10 +44,6 @@
                                                 <tr>
                                                     <th>ID Booking</th>
                                                     <th>Nama</th>
-                                                    <!-- <th>Metode Pembayaran</th>
-                                                    <th>Nama Akun Rekening</th>
-                                                    <th>Nomor Rekening Pelanggan</th>
-                                                    <th>Nomor Rekening Tujuan</th> -->
                                                     <th>Total Pembayaran</th>
                                                     <!-- <th>Bukti Pembayaran</th> -->
                                                     <th>Status</th>
@@ -70,30 +66,9 @@
                                                         {{ $transaction->order->user->name }}
                                                         @endisset
                                                     </td>
-                                                    <!-- <td>
-                                                        @isset($transaction->method->method)
-                                                        {{ $transaction->method->method }}
-                                                        @endisset
-                                                    </td>
-                                                    <td>
-                                                        @isset($transaction->name_account)
-                                                        {{ $transaction->name_account }}
-                                                        @endisset
-                                                    </td>
-                                                    <td>
-                                                        @isset($transaction->from_account)
-                                                        {{ $transaction->from_account }}
-                                                        @endisset
-                                                    </td> -->
-                                                    <!-- <td>
-                                                        @isset($transaction->method->target_account)
-                                                        {{ $transaction->method->target_account }}
-                                                        @endisset
-                                                    </td> -->
-
                                                     <td>
                                                         @isset($transaction->total)
-                                                        {{ $transaction->total }}
+                                                        {{ 'Rp ' . number_format($transaction->total, 0, ',', '.') }}
                                                         @endisset
                                                     </td>
                                                     <!-- <td>
@@ -115,24 +90,56 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @can('isAdmin')
+
+                                                        <!-- @can('isAdmin')
+                                                        @if ($transaction->status == 'unpaid')
+                                                
                                                         <button class="btn btn-primary btn-xs" type="button" data-toggle="modal"
                                                             data-target="#modal-transaction-{{ $transaction->id }}">Perbaharui
-                                                            Status
+                                                            Status 
+                                                            
                                                         </button>
                                                         @else
+                                                        Sudah Bayar
+                                                        @endif
+                                                        
+                                                        @else -->
                                                         <!-- <button class="btn btn-primary btn-xs" type="button" data-toggle="modal"
                                                             data-target="#modal-upload-{{ $transaction->id }}">Unggah
                                                             Bukti Pembayaran
                                                         </button> -->
-                                                        @if ($transaction->status == 'unpaid')
-                                                        <a href='pay1/{{$transaction->id }}''>bayar
+                                                        <!-- @if ($transaction->status == 'unpaid')
+                                                        <a href='pay1/{{$transaction->id }}'>bayar
                                                         </a>
                                                         @else
                                                         Sudah Bayar
                                                         @endif
-                                                       
+                                                        @endcan -->
+                                                        @can('isAdmin')
+                                                            @if ($transaction->status == 'unpaid')
+                                                                <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900" type="button" data-toggle="modal"
+                                                                    data-target="#modal-transaction-{{ $transaction->id }}">Perbaharui Status
+                                                                </button>
+                                                            @else
+                                                                Sudah Bayar
+                                                            @endif
                                                         @endcan
+                                                        @can('isKaryawan')
+                                                            @if ($transaction->status == 'unpaid')
+                                                                <button class="btn btn-primary btn-xs" type="button" data-toggle="modal"
+                                                                    data-target="#modal-transaction-{{ $transaction->id }}">Perbaharui Status
+                                                                </button>
+                                                            @else
+                                                                Sudah Bayar
+                                                            @endif
+                                                        @endcan
+                                                        @if (!Gate::allows('isAdmin') && !Gate::allows('isKaryawan'))
+                                                        @if ($transaction->status == 'unpaid')
+                                                            <a href='pay1/{{$transaction->id }}'>bayar</a>
+                                                        @else
+                                                            Sudah Bayar
+                                                        @endif
+                                                    @endunless
                                                     </td>
 
                                                     <div class="modal fade" tabindex="-1" role="dialog"
@@ -229,7 +236,7 @@
                                                                             </ol>
                                                                         </div>
 
-                                                                        <div class="card card-body">
+                                                                        <!-- <div class="card card-body">
                                                                             <h5 style="font-weight: 700">Bukti Pembayaran
                                                                             </h5>
                                                                             @isset($transaction->image)
@@ -240,7 +247,7 @@
                                                                             <span class="alert alert-danger">Bukti
                                                                                 Pembayaran belum diunggah</span>
                                                                             @endisset
-                                                                        </div>
+                                                                        </div> -->
 
                                                                         <div class="input-group w-100">
 
@@ -278,9 +285,9 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Unggah Bukti Pembayaran
+                                                                    <!-- <h4 class="modal-title">Unggah Bukti Pembayaran
                                                                     </h4>
-                                                                   
+                                                                    -->
                                                                     <button type="button" class="close" data-dismiss="modal"
                                                                         aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -291,14 +298,14 @@
                                                                     @csrf
                                                                     @method('PUT')
                                                                     <div class="modal-body">
-                                                                        @isset($transaction->image)
+                                                                        <!-- @isset($transaction->image)
                                                                         <div class="form-group row">
                                                                             <img src="{{ asset($transaction->image) }}"
                                                                                 alt="{{ $transaction->image }}"
                                                                                 style="width: 100px; height: 100px"
                                                                                 class="rounded border">
                                                                         </div>
-                                                                        @endisset
+                                                                        @endisset -->
 
                                                                         <!-- <div class="form-group row">
                                                                             <div class="col-sm-12">
@@ -338,6 +345,24 @@
                                                 </tr>
                                                 @endforeach
                                             </tbody>
+                                            @can('isAdmin')
+                                             <tfooter>
+                                                <tr>
+                                                    <th>Total Sudah Di bayar</th>
+                                                    <td></td>
+                                                    <td>{{ 'Rp ' . number_format($totalPembayaranPaid, 0, ',', '.') }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Total Belum Dibayar</th>
+                                                    <td></td>
+                                                    <td>{{ 'Rp ' . number_format($totalPembayaranUnpaid, 0, ',', '.') }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfooter>
+                                            @endcan
                                         </table>
                                     </div>
                                     <!-- /.card-body -->

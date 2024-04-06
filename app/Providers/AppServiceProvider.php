@@ -27,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->role == 'admin';
         });
 
+        Gate::define('isKaryawan', function ($user) {
+            return $user->role == 'karyawan';
+        });
+
         Gate::define('isCustomer', function ($user) {
             return $user->role == 'customer';
         });

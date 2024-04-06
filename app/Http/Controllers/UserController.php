@@ -90,16 +90,13 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validatedData = $request->validate([
-            'name' => ['required', 'min:5', 'max:100'],
-            'phone_number' => ['required', 'min:10', 'max:100'],
-            'gender' => ['required'],
+            'name'          => ['required', 'min:5', 'max:100'],
+            'no_hp'         => ['required', 'min:10', 'max:100'],
+            'gender'        => ['required'],
+            'role'          => ['required'],
         ]);
 
-        if ($validatedData['gender'] == 1) {
-            $validatedData['gender'] = true;
-        } else {
-            $validatedData['gender'] = false;
-        }
+       
 
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('public_profiles');
@@ -117,6 +114,7 @@ class UserController extends Controller
             return redirect('/users' . '/' . Auth::id());
         }
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -132,5 +130,19 @@ class UserController extends Controller
         } else {
             return redirect('/users' . '/' . Auth::id());
         }
+    }
+    function uprole($id)
+    {
+        $data = User::find($id);
+        $data->role = 'karyawan';
+        $data->save();
+        return redirect('/users')->with('success', 'Berhasil Mengubah Role.');
+    }
+    function downrole($id)
+    {
+        $data = User::find($id);
+        $data->role = 'customer';
+        $data->save();
+        return redirect('/users')->with('success', 'Berhasil Mengubah Role.');
     }
 }

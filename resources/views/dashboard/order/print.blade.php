@@ -3,11 +3,10 @@
 @section('front')
 <a href="/orders">Kembali</a>
 <div class="wrapper">
-   
+
     <!-- Main content -->
     <section class="invoice" style="margin: 30px; border: none">
         <!-- title row -->
-        
         <div class="row">
             <div class="col-12">
                 <h2 class="page-header">
@@ -32,7 +31,6 @@
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
-
                 <br>
                 <br>
                 <address>
@@ -47,24 +45,19 @@
                     @isset($order->user->email)
                     <br> Email: {{ $order->user->email }}
                     @endisset
-
                 </address>
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
                 <br>
                 <br>
-                <b>Invoice #{{ $order->order_code }}</b><br>
-                <br>
-                {!! DNS1D::getBarcodeHTML($order->order_code, "C128", 1.2, 45) !!}
-                <br>
-                <b>Order ID:</b> {{ $order->order_code }}<br>
-                @isset($order->transaction->method->method)
-                <b>Metode Pembayaran :</b> {{ $order->transaction->method->method }}
-                <br>
-                @endisset
 
-
+                <div class="flex-1">
+                    <h5 class="mb-0">Kode Booking</h5>
+                    <h3 class="font-bold">{{$order->order_code}}</h3>
+                </div>
+                <br>
+                {!! DNS1D::getBarcodeHTML($order->order_code, "C128", 1.5, 75) !!}
             </div>
             <!-- /.col -->
         </div>
@@ -87,7 +80,7 @@
                     </thead>
                     <tbody>
                         @foreach ($order->passengers as $passenger)
-                        <tr>
+                        <tr class='border-slate-950 border-8'>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $order->ticket->transportasi->name }}</td>
                             <td>{{ $order->ticket->type->name }}</td>
@@ -104,7 +97,39 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
-
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nama Penumpang</th>
+                        <th>Nik</th>
+                        <th>Jenis Kelamin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($order->passengers as $passenger)
+                    <tr>
+                        <td>{{ $passenger->name }}</td>
+                        <td>{{ $passenger->id_number }}</td>
+                        <td>
+                            <div>
+                                @isset($passenger->gender)
+                                @if ($passenger->gender == true)
+                                Laki-laki
+                                @else
+                                Perempuan
+                                @endif
+                                @else
+                                Tidak dapat
+                                ditampilkan
+                                @endisset
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         <div class="row">
             <!-- accepted payments column -->
             <div class="col-6">
@@ -127,6 +152,7 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
+
     </section>
     <!-- /.content -->
 </div>

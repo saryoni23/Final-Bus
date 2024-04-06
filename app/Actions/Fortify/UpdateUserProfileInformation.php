@@ -22,6 +22,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'no_hp' => ['nullable'],
             'tgllahir' => ['date'],
+            'gender'    => ['required'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -38,6 +39,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'no_hp' => $input['no_hp'],
                 'tgllahir' => $input['tgllahir'],
                 'email' => $input['email'],
+                'gender' => $input['gender'],
             ])->save();
         }
     }

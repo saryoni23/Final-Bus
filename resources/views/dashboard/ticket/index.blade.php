@@ -11,7 +11,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Harga</h1>
+                                <h1>Daftar Tiket</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -201,10 +201,10 @@
                                                     <th>No</th>
                                                     <!-- <th>Transportasi</th>    -->
                                                     <th>Kode Bus</th>   
-                                                    <th>Pergi dari</th>
-                                                    <th>Tujuan ke</th>
-                                                    <th>Jenis</th>
-                                                    <th>Jumlah Harga</th>
+                                                    <th>Loket Keberangkatan</th>
+                                                    <th>Loket Tujuan</th>
+                                                    <th>Jenis Bus/Jenis Tiket</th>
+                                                    <th>Harga Tiket</th>
                                                     @can('isAdmin')
                                                     <th>Action</th>
                                                     @endcan
@@ -259,16 +259,24 @@
                                                         @endisset
                                                     </td>
                                                     @can('isAdmin')
-                                                    <td>
-                                                        <a class='btn btn-primary btn-xs mx-1' data-toggle="modal"
+                                                    <td class='flex space-x-3'>
+                                                        <a class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900' data-toggle="modal"
                                                             data-target="#modal-{{ $ticket->id }}">Ubah Harga</a>
-                                                        <form action="/tickets/{{ $ticket->id }}" method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus?');">
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <button class='btn btn-danger btn-xs mx-1'>Delete</button>
-                                                        </form>
+                                                        
+                                                        <form onsubmit="return confirmHapus(event)"
+                                                                    action="/tickets/{{ $ticket->id }}" method="POST">
+                                                                    @csrf @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                        HAPUS
+                                                                    </button>
+                                                                </form>
                                                     </td>
                                                     @endcan
                                                     <div class="modal fade" id="modal-{{ $ticket->id }}">
@@ -339,4 +347,27 @@
             </div>
         </div>
     </div>
+    <script>
+        function confirmHapus(event) {
+            event.preventDefault(); // Menghentikan form dari pengiriman langsung
+
+            Swal.fire({
+                title: 'Yakin Hapus Data?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                theme: 'dark',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+            }).then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    event.target.submit(); // Melanjutkan pengiriman form
+                } else {
+                    swal('Your imaginary file is safe!');
+                }
+            });
+        }
+        </script>
 </x-app-layout>

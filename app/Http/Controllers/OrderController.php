@@ -30,6 +30,19 @@ class OrderController extends Controller
                 'orders' => Order::all(),
                 'complaints' => Complaint::all()
             ]);
+        } elseif (Gate::allows('isKaryawan')) {
+            // Tampilkan pesanan yang dilakukan oleh pengguna dengan peran "customer"
+            // dan pesanan yang dilakukan oleh karyawan itu sendiri
+            $orders = Order::whereHas('user', function ($query) {
+                $query->where('role', 'customer')
+                    ->orWhere('id', Auth::id()); // Pesanan yang dilakukan oleh karyawan itu sendiri
+            })->get();
+
+            return view('dashboard.order.index', [
+                'orders' => $orders,
+                'complaints' => Complaint::all(),
+            ]);
+            return view('dashboard.order.index', []);
         } else {
             return view('dashboard.order.index', [
                 'orders' => Order::where('user_id', Auth::id())->get(),
@@ -193,7 +206,7 @@ class OrderController extends Controller
 
             $validatedDataTransaction2['total'] = $order2->ticket->price->price * $validatedDataOrder['amount'];
 
-            $validatedDataTransaction2['status'] = false;
+            $validatedDataTransaction2['status'] = 'unpaid';
 
             Transaction::create($validatedDataTransaction2);
         }

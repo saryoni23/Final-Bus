@@ -27,12 +27,12 @@ class CreateNewUser implements CreatesNewUsers
             'password'  => $this->passwordRules(),
             'terms'     => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ],[
-            'name.required'     =>  'Full Name Wajib Diisi',
-            'name.min'          =>  'Full Name Minimal 5 Karakter',
+            'name.required'         =>  'Nama Wajib Diisi',
+            'name.min'              =>  'Nama Minimal 5 Karakter',
             'tgllahir.required'     =>  'Tanggal Lahir Wajib Diisi',
             'email.required'        =>  'Email Wajib Diisi',
             'email.unique:users'    =>  'Email Sudah Terdaftar',
-            'email.unique'    =>  'Email Sudah Terdaftar',
+            'email.unique'          =>  'Email Sudah Terdaftar',
             'password.required'     =>  'Password Wajib Diisi',
             'password.min'          =>  'Password Minimal 6 Karakter',
             ])->validate();

@@ -19,8 +19,28 @@ class TransactionController extends Controller
 
 
         if (Gate::allows('isAdmin')) {
+            $totalPembayaranPaid    = Transaction::where('status', 'paid')->sum('total');
+            $totalPembayaranUnpaid  = Transaction::where('status', 'unpaid')->sum('total');
             return view('dashboard.transaction.index', [
-                'transactions' => Transaction::all()
+                'transactions' => Transaction::all(),
+                'totalPembayaranPaid' => $totalPembayaranPaid,
+                'totalPembayaranUnpaid' => $totalPembayaranUnpaid,
+            ]);
+        } elseif (Gate::allows('isKaryawan')) {
+            // Tampilkan transaksi yang dilakukan oleh pengguna dengan peran "customer"
+            // dan transaksi yang dilakukan oleh karyawan itu sendiri
+            $transactions = Transaction::where(function ($query) {
+                $query->whereHas('order.user', function ($query) {
+                    $query->where('role', 'customer');
+                })
+                ->orWhereHas('order.user', function ($query) {
+                    $query->where('role', 'karyawan')
+                          ->where('id', Auth::id());
+                });
+            })->get();
+    
+            return view('dashboard.transaction.index', [
+                'transactions' => $transactions
             ]);
         } else {
             return view('dashboard.transaction.index', [
@@ -94,15 +114,29 @@ class TransactionController extends Controller
             ]);
 
             if ($request['status']) {
-                $validatedData['status'] = true;
+                $validatedData['status'] = 'paid';
             } else {
-                $validatedData['status'] = false;
+                $validatedData['status'] = 'unpaid';
             }
 
             $transaction->update($validatedData);
 
             return redirect('/transactions');
-        } else {
+        } elseif (Gate::allows('isKaryawan')) {
+            $validatedData = $request->validate([
+                'status' => []
+            ]);
+
+            if ($request['status']) {
+                $validatedData['status'] = 'paid';
+            } else {
+                $validatedData['status'] = 'unpaid';
+            }
+
+            $transaction->update($validatedData);
+
+            return redirect('/transactions');
+        }else {
             $validatedData = $request->validate([
                 'image' => ['image', 'file', 'max:4096'],
             ]);

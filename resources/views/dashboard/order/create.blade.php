@@ -69,17 +69,19 @@ $routeTo = array_unique($routeTo);
                                         @csrf
                                         @method('POST')
                                         <div class="card-body">
-                                            <h4>Data Tiket</h4>
+       
 
                                             <div class="form-group row">
                                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Rute :</label>
                                                 <div class="col-sm-5">
-                                                    <select class="form-control" id="keberangkatan"
+                                                    <select x-init="$($el).select2({})"
+                                                    class="select2 w-full py-2 px-4 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                                     id="keberangkatan"
                                                         onchange="getSelectValue(this.value);" name="from_route"
                                                         required>
                                                         @if (old('from_route'))
-                                                        <option value="{{ old('from_route') }}">
-                                                            {{ old('from_route') }}
+                                                        <option value="{{ old('from_route') }}" >
+                                                            {{ old('from_route') }} 
                                                         </option>
                                                         @else
                                                         <option disabled selected>-- Pilih Keberangkatan --
