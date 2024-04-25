@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
             <div class="flex flex-row gap-4">
@@ -52,7 +52,7 @@
             </div>
         </form>
     </x-authentication-card>
-</x-app-layout>
+</x-guest-layout>
 
 <script>
     const passwordInput = document.getElementById("password");

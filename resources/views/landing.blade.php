@@ -101,7 +101,7 @@
     </div>
 </section> -->
 
-<section class="ftco-section testimony-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
+{{-- <section class="ftco-section testimony-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
     <div class="overlay"></div>
     <div class="container">
         <div class="row justify-content-center pb-4">
@@ -138,7 +138,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
     <div class="container">

@@ -187,7 +187,7 @@ class TransactionController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
-        $transaction = Transaction::findOrFail($id);
+        $transaction = Transaction::findOrFail($id); 
         $params = array(
             'transaction_details' => array(
                 'order_id' => $transaction->order_id ,

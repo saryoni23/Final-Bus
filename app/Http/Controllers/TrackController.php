@@ -38,8 +38,8 @@ class TrackController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'from_route' => ['required'],
-            'to_route' => ['required']
+            'from_route'    => ['required'],
+            'to_route'      => ['required']
         ]);
 
         if (Track::where('from_route', $request['from_route'])->where('to_route', $request['to_route'])->first()) {

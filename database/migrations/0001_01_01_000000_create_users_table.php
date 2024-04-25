@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('tgllahir')->nullable();
             // $table->string('image')->default('public_profiles/default_profile.jpg');
             $table->string('role')->default('customer');
-            $table->boolean('gender')->nullable(); // laki-laki => 1
+            $table->string('gender')->nullable(); // laki-laki => 1
             
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

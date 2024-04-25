@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('body');
             $table->boolean('seen')->default(false);
             $table->boolean('seenForAdmin')->default(false);
+            $table->boolean('seenForKaryawan')->default(false);
             $table->timestamps();
         });
     }

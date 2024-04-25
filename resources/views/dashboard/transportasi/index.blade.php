@@ -147,25 +147,13 @@
                                                         {{ $transportasis->kode }}
                                                         @endisset
                                                     </td>
-                                                    <td>
-                                                        <a class='btn btn-primary btn-xs mx-1' data-toggle="modal"
-                                                            data-target="#modal-ubah-{{ $transportasis->id }}">Ubah</a>
-                                                        <form action="/transportasi/{{ $transportasis->id }}"
-                                                            method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus?');">
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <button class='btn btn-danger btn-xs mx-1'>Delete</button>
-                                                        </form>
-                                                        
-                                                    </td>
+                                                   
                                                     <td class='flex space-x-3'>
                                                         <a class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900' data-toggle="modal"
-                                                            data-target="#modal-ubah-{{ $track->id }}">Ubah</a>
+                                                            data-target="#modal-ubah-{{ $transportasis->id }}">Ubah</a>
                                                         
                                                         <form onsubmit="return confirmHapus(event)"
-                                                                    action="/tracks/{{ $track->id }}" method="POST">
+                                                                    action="/transportasi/{{ $transportasis->id }}" method="POST">
                                                                     @csrf @method('DELETE')
                                                                     <button type="submit"
                                                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">

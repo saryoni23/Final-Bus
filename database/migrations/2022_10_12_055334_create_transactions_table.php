@@ -16,12 +16,9 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id');
-            $table->foreignId('method_id');
-            $table->string('name_account');
-            $table->string('from_account');
             $table->bigInteger('total');
             $table->string('image')->nullable();
-            $table->boolean('status');
+            $table->enum('status', ['unpaid','paid','pending'])->default('unpaid');
             $table->timestamps();
         });
     }

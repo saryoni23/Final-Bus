@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
-    <!-- <script src="{{ asset('build/assets/app-D2jpX1vH.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DfZ-n7cB.css') }}"> -->
+    <script src="{{ asset('build/assets/app-D2jpX1vH.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DfZ-n7cB.css') }}"> 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
@@ -41,6 +41,7 @@
 <body class="font-sans antialiased bg-white dark:bg-gray-800">
 
     @livewire('navigation-menu')
+    {{-- @include('layouts.partials.sidebar') --}}
 
 
 
@@ -59,7 +60,7 @@
     </main>
 
 
-    @include('layouts.partials.footer')
+   
     @stack('modals')
 
     @livewireScripts
