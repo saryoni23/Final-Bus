@@ -21,10 +21,10 @@
                 <li class="nav-item {{ Request::is('dashboard') ? 'active ' : '' }}"><a href="/dashboard"
                         class="nav-link">Dashboard</a></li>
                 @else
-                <li class="nav-item {{ Request::is('register') ? 'active ' : '' }}"><a href="/register"
-                        class="nav-link">Register</a></li>
                 <li class="nav-item {{ Request::is('login') ? 'active ' : '' }}"><a href="/login"
                         class="nav-link">Login</a></li>
+                <li class="nav-item {{ Request::is('register') ? 'active ' : '' }}"><a href="/register"
+                        class="nav-link">Daftar</a></li>
                 @endauth
 
             </ul>

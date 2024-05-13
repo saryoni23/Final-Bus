@@ -42,11 +42,11 @@ Route::get('/email/verify', function () {
 })->middleware('auth')->name('verification.notice');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-        //  Airline Route
+        //  transportasi Route
     Route::resource('/transportasi', TransportasiController::class)->middleware(['auth', 'verified', 'can:isAdmin']);
     
     //  Type Route
@@ -98,8 +98,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
 
 Route::get('/pay1/{id}', [TransactionController::class,'pay1'])->middleware(['auth', 'verified']);
-
-
 
 Route::post('/uprole/{id}',     [UserController::class, 'uprole']);
 Route::post('/downrole/{id}',     [UserController::class, 'downrole']);

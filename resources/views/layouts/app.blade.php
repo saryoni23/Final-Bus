@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Tic-Bus') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
-    <script src="{{ asset('build/assets/app-D2jpX1vH.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DfZ-n7cB.css') }}"> 
+    <script src="{{ asset('build/assets/style.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/style.css') }}"> 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
@@ -33,33 +33,32 @@
     <script src="{{ asset('plugins/select2/js/select2.full.js') }}"></script>
     <link href="{{ asset('plugins/select2/css/select2.css') }}" rel="stylesheet" />
 
-
-
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased bg-white dark:bg-gray-800">
+<body class="font-sans antialiased bg-gray-200 dark:bg-gray-900">
 
     @livewire('navigation-menu')
-    {{-- @include('layouts.partials.sidebar') --}}
+     @include('layouts.partials.sidebar')
 
 
 
     <!-- Page Heading -->
-    @if (isset($header))
-    <header class="bg-white dark:bg-gray-800 shadow">
+    <!-- @if (isset($header))
+    <header class="bg-gray-200 dark:bg-gray-900 shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             {{ $header }}
         </div>
     </header>
-    @endif
+    @endif -->
 
     <!-- Page Content -->
-    <main>
-        {{ $slot }}
+    <main >
+        <div class="antialiased bg-gray-50 dark:bg-gray-900">
+
+            {{ $slot }}
+        </div>
     </main>
-
-
    
     @stack('modals')
 

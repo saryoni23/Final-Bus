@@ -1,109 +1,169 @@
-@extends('layouts.front')
 
 <x-app-layout>
-    <div class="py-12">
+    <main class="p-4 md:ml-64 h-full pt-20 bg-gray-200 dark:bg-gray-900">
+        <div class="mb-10">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="#"
+                            class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="grid grid-rows-3 gap-10 max-h-full ">
+    
+            <div class="h-auto flex flex-row justify-start items-start gap-2">
+                <article
+                    class="p-6 justify-items-center bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="" type="button"
+                        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-white rounded-lg hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-400 dark:focus:ring-gray-800">
+                        <svg class="w-20 h-20 text-gray-900 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M4 5a2 2 0 0 0-2 2v2.5c0 .6.4 1 1 1a1.5 1.5 0 1 1 0 3 1 1 0 0 0-1 1V17a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5a1 1 0 0 0-1-1 1.5 1.5 0 1 1 0-3 1 1 0 0 0 1-1V7a2 2 0 0 0-2-2H4Z" />
+                        </svg>
+                        <span class="sr-only">Notifications</span>
+                        <div
+                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -end-0 dark:border-gray-900">
+                            20</div>
+                    </a>
+                    <h2 class="mb-2 text-2xl font-bold text-center tracking-tight text-gray-900 dark:text-white"><a
+                            href="#">Tiket</a></h2>
+                </article>
+                <article
+                    class="p-6 justify-items-center bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="" type="button"
+                        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-white rounded-lg hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-400 dark:focus:ring-gray-800">
+                        <svg class="w-20 h-20 text-gray-900 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M4 5a2 2 0 0 0-2 2v2.5c0 .6.4 1 1 1a1.5 1.5 0 1 1 0 3 1 1 0 0 0-1 1V17a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5a1 1 0 0 0-1-1 1.5 1.5 0 1 1 0-3 1 1 0 0 0 1-1V7a2 2 0 0 0-2-2H4Z" />
+                        </svg>
+                        <span class="sr-only">Notifications</span>
+                        <div
+                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -end-0 dark:border-gray-900">
+                            20</div>
+                    </a>
+                    <h2 class="mb-2 text-2xl font-bold text-center tracking-tight text-gray-900 dark:text-white"><a
+                            href="#">Tiket</a></h2>
+                </article>
+                <article
+                    class="p-6 justify-items-center bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a href="" type="button"
+                        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-white rounded-lg hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-400 dark:focus:ring-gray-800">
+                        <svg class="w-20 h-20 text-gray-900 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M4 5a2 2 0 0 0-2 2v2.5c0 .6.4 1 1 1a1.5 1.5 0 1 1 0 3 1 1 0 0 0-1 1V17a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5a1 1 0 0 0-1-1 1.5 1.5 0 1 1 0-3 1 1 0 0 0 1-1V7a2 2 0 0 0-2-2H4Z" />
+                        </svg>
+                        <span class="sr-only">Notifications</span>
+                        <div
+                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -end-0 dark:border-gray-900">
+                            20</div>
+                    </a>
+                    <h2 class="mb-2 text-2xl font-bold text-center tracking-tight text-gray-900 dark:text-white"><a
+                            href="#">Tiket</a></h2>
+                </article>
+    
+            </div>
+        </div>
+    </main>
+    <!-- <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 content-wrapper">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"> -->
                 <!-- Content Wrapper. Contains page content -->
 
                 <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1>Dashboard</h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                    <li class="breadcrumb-item active">Dashboard</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
+                <!-- <x-slot name="header">
+                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        {{ __('Dashboard') }}
+                    </h2>
+                </x-slot> -->
 
                 <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <!-- Small boxes (Stat box) -->
-                        @can('isAdmin')
-                        <div class="row">
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-info">
-                                    <div class="inner">
-                                        <h3>Tiket</h3>
+                <!-- <div class="py-12 dark:bg-gray-800">
+                    <div class="max-w-7xl mx-auto dark:bg-gray-800 sm:px-6 lg:px-8">
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                            @can('isAdmin')
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-blue-500 rounded-lg shadow-md p-4">
+                                    <div class="text-white dark:text-black">
+                                        <h3 class="text-lg font-semibold">Tiket</h3>
                                         <p>{{ $tickets->count() }} tiket telah terdaftar!</p>
-                                        <br>
                                     </div>
-                                    <div class="icon">
-                                        <i class="ion ion-bag"></i>
-                                    </div>
-                                    <a href="/tickets" class="small-box-footer">Klik untuk melihat daftar harga
-                                        tiket <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="/tickets" class="text-white dark:text-black hover:text-blue-200 mt-4 inline-block">Klik untuk melihat daftar harga tiket 
+                                        <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                        </svg>
+                                    </a>
                                 </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-success">
-                                    <div class="inner">
-                                        <h3>Pesanan</h3>
+                                <div class="bg-green-500 rounded-lg shadow-md p-4">
+                                    <div class="text-white dark:text-black">
+                                        <h3 class="text-lg font-semibold">Pesanan</h3>
                                         <p>Terdapat pesanan lebih dari {{ $orders->count() - 1 }}</p>
-                                        <br>
                                     </div>
-                                    <div class="icon">
-                                        <i class="ion ion-stats-bars"></i>
+                                    <a href="#" class="text-white dark:text-black hover:text-green-200 mt-4 inline-block">Klik untuk melihat daftar pesanan 
+                                        <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="bg-yellow-500 rounded-lg shadow-md p-4">
+                                    <div class="text-white dark:text-black">
+                                        <h3 class="text-lg font-semibold">Transaksi</h3>
+                                        <p>Terdapat {{ $transactions->count() }} yang belum di konfirmasi/setujui</p>
                                     </div>
-                                    <a href="#" class="small-box-footer">Klik untuk melihat daftar pesanan <i
-                                            class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="/transactions" class="text-white dark:text-black hover:text-yellow-200 mt-4 inline-block">Klik untuk melihat daftar transaksi 
+                                        <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="bg-red-500 rounded-lg shadow-md p-4">
+                                    <div class="text-white dark:text-black">
+                                        <h3 class="text-lg font-semibold">Keluhan</h3>
+                                        <p>Terdapat {{ $complaints->count() }} keluhan/obrolan yang belum ditanggapi</p>
+                                    </div>
+                                    <a href="/orders" class="text-white dark:text-black hover:text-red-200 mt-4 inline-block">Klik untuk melihat daftar keluhan 
+                                        <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-warning">
-                                    <div class="inner">
-                                        <h3>Transaksi</h3>
-
-                                        <p>Terdapat {{ $transactions->count() }} yang belum di konfirmasi/setujui
-                                        </p>
-                                        <br>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-person-add"></i>
-                                    </div>
-                                    <a href="/transactions" class="small-box-footer">Klik untuk melihat daftar
-                                        transaksi <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-danger">
-                                    <div class="inner">
-                                        <h3>Keluhan</h3>
-
-                                        <p>Terdapat {{ $complaints->count() }} keluhan/obrolan yang belum ditanggapi
-                                        </p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-pie-graph"></i>
-                                    </div>
-                                    <a href="/orders" class="small-box-footer">Klik untuk melihat daftar keluhan <i
-                                            class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- /.card-body -->
+                            
+                            @endcan
                         </div>
-                        @endcan
-                        @can('isCustomer')
+                    </div>
+                </div>
+                <section class="content">
+                    <div class="container-fluid"> -->
+                        <!-- Small boxes (Stat box) -->
+                        
+                        <!-- @can('isCustomer')
                         <div class="row">
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-3 col-6"> -->
                                 <!-- small box -->
-                                <div class="small-box bg-success">
+                                <!-- <div class="small-box bg-success">
                                     <div class="inner">
                                         <h3>Pesanan</h3>
 
@@ -116,12 +176,12 @@
                                     <a href="/orders/create" class="small-box-footer">Klik untuk memesan tiket
                                         mu <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- ./col -->
 
-                            <div class="col-lg-3 col-6">
+                            <!-- <div class="col-lg-3 col-6"> -->
                                 <!-- small box -->
-                                <div class="small-box bg-info">
+                                <!-- <div class="small-box bg-info">
                                     <div class="inner">
                                         <h3>Tiket</h3>
 
@@ -135,12 +195,12 @@
                                     <a href="/tickets" class="small-box-footer">Klik untuk melihat daftar harga
                                         tiket <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- ./col -->
 
-                            <div class="col-lg-3 col-6">
+                            <!-- <div class="col-lg-3 col-6"> -->
                                 <!-- small box -->
-                                <div class="small-box bg-warning">
+                                <!-- <div class="small-box bg-warning">
                                     <div class="inner">
                                         <h3>Transaksi</h3>
                                         <p>Terdapat {{ $transactions->count() }} transaksi yang belum di
@@ -155,9 +215,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-3 col-6"> -->
                                 <!-- small box -->
-                                <div class="small-box bg-danger">
+                                <!-- <div class="small-box bg-danger">
                                     <div class="inner">
                                         <h3>Keluhan</h3>
 
@@ -170,48 +230,49 @@
                                     <a href="/orders" class="small-box-footer">Klik untuk melihat daftar keluhan <i
                                             class="fas fa-arrow-circle-right"></i></a>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- ./col -->
                             <!-- /.card-body -->
-                        </div>
-                        @endcan
+                        <!-- </div>
+                        @endcan -->
                         <!-- ./col -->
-                    </div>
+                    <!-- </div> -->
                     <!-- /.row -->
                     <!-- Main row -->
-                    <div class="row">
+                    <!-- <div class="row"> -->
                         <!-- Left col -->
                         <!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                        <section class="col-lg-5 connectedSortable">
+                        <!-- <section class="col-lg-5 connectedSortable"> -->
 
                             <!-- Map card -->
-                            <div class="card bg-gradient-primary">
+                            <!-- <div class="card bg-gradient-primary"> -->
                                 <!-- /.card-body-->
-                            </div>
+                            <!-- </div> -->
                             <!-- /.card-body -->
-                            <div class="card-footer bg-transparent">
-                                <div class="row">
-                                </div>
+                            <!-- <div class="card-footer bg-transparent"> -->
+                                <!-- <div class="row">
+                                </div> -->
                                 <!-- /.row -->
-                            </div>
+                            <!-- </div> -->
                             <!-- /.card-footer -->
-                    </div>
+                    <!-- </div> -->
                     <!-- /.card -->
                     <!-- /.card -->
-                </section>
+                <!-- </section> -->
                 <!-- right col -->
-            </div>
+            <!-- </div> -->
             <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-        </section>
+        <!-- </div> -->
+        <!-- /.container-fluid -->
+        <!-- </section> -->
         <!-- /.content -->
-    </div>
-    </div>
+    <!-- </div> -->
+    <!-- </div> -->
     <!-- ./wrapper -->
 
     <!-- Page specific script -->
-    <script>
+    <!-- <script>
         $(function () {
             /* ChartJS
              * -------
@@ -391,7 +452,7 @@
                 options: stackedBarChartOptions
             })
         })
-    </script>
+    </script> -->
 
 
 </x-app-layout>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Tic-Bus') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,9 +18,10 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
-    <!-- Scripts -->
-    {{-- <script src="{{ asset('build/assets/app-D2jpX1vH.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DfZ-n7cB.css') }}">  --}}
+     <!-- Scripts -->
+     <script src="{{ asset('build/assets/style.js') }}"></script>
+     <link rel="stylesheet" href="{{ asset('build/assets/style.css') }}"> 
+
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
