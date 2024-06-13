@@ -10,7 +10,7 @@
         <x-validation-errors class="mb-4" />
 
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
+            <div class="mb-4 text-sm font-medium text-green-600">
                 {{ session('status') }}
             </div>
         @endif
@@ -21,13 +21,13 @@
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             </div>
 
-            <div class="mt-4 relative">
+            <div class="relative mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                <button type="button" id="togglePassword" class="absolute inset-y-10 right-0 flex items-center pr-3 focus:outline-none">
+                <x-input id="password" class="block w-full mt-1" type="password" name="password" required autocomplete="current-password" />
+                <button type="button" id="togglePassword" class="absolute right-0 flex items-center pr-3 inset-y-10 focus:outline-none">
                     <span id="toggleButtonText" class="text-gray-500 dark:text-yellow-600">Tampilkan</span>
                 </button>
             </div>
@@ -35,13 +35,13 @@
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm dark:text-white text-gray-600">{{ __('Ingat Saya') }}</span>
+                    <span class="text-sm text-gray-600 ms-2 dark:text-white">{{ __('Ingat Saya') }}</span>
                 </label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-white hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                    <a class="text-sm text-gray-600 underline rounded-md dark:text-white hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                         {{ __('Lupa Password?') }}
                     </a>
                 @endif

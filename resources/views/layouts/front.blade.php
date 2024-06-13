@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'TicBus') }}</title>
+    <title>ticbus</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -71,7 +71,7 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script> 
+    <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 
     {{-- Tiket --}}
     <!-- DataTables  & Plugins -->
@@ -99,14 +99,12 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "action": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
-                "action": false,
                 "ordering": true,
                 "info": true,
                 "autoWidth": false,

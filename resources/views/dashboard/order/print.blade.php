@@ -80,7 +80,7 @@
                     </thead>
                     <tbody>
                         @foreach ($order->passengers as $passenger)
-                        <tr class='border-slate-950 border-8'>
+                        <tr class='border-8 border-slate-950'>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $order->ticket->transportasi->name }}</td>
                             <td>{{ $order->ticket->type->name }}</td>

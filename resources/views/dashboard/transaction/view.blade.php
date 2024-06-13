@@ -1,26 +1,43 @@
 @extends('layouts.front')
 
-<x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 content-wrapper">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1></h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                    <li class="breadcrumb-item active">Riwayat Transaksi</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
+@section('front')
+<div class="wrapper">
+    <!-- Navbar -->
+    <x-front-dashboard-navbar></x-front-dashboard-navbar>
+    <!-- /.Navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/dashboard" class="brand-link">
+            <img src="{{ asset('dist/img/TicBusLogo1.png') }}"width="50" alt="ticbus Logo">
+        </a>
+        <!-- Sidebar Menu -->
+        <x-front-sidemenu></x-front-sidemenu>
+        <!-- /.sidebar Menu -->
+    </aside>
+
+    
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="mb-2 row">
+                    <div class="col-sm-6">
+                        <h1>Detail TRANSAKSI</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item active">Detail TRANSAKSI</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
 
                 <!-- Main content -->
                 <section class="content">
@@ -30,9 +47,7 @@
 
 
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Detail TRANSAKSI</h3>
-                                    </div>
+                                   
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered">
@@ -100,5 +115,26 @@
         });
     </script>
 
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+    <span class='dark:text-white'>
+        Copyright &copy;
+        @if (date('Y') != '2020')
+        {{ date('Y') }}
+        @endif
+        &nbsp; All rights reserved • by
+        <a href="" target="_blank">Saryoni</a>.
+    </span>
+    <div class="float-right d-none d-sm-inline-block">
+    </div>
+</footer>
 
-</x-app-layout>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+@endsection

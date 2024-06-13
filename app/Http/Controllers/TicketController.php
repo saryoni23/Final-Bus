@@ -42,7 +42,7 @@ class TicketController extends Controller
     public function create()
     {
         // return view('admin.dashboard.ticket.index', [
-        //     'airlines' => Airline::all(),
+        //     'transportasi' => Airline::all(),
         //     'types' => Type::all(),
         //     'tracks' => Track::all()
         // ]);
