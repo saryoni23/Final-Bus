@@ -260,15 +260,33 @@
                                             </td>
                                             @can('isAdmin')
                                             <td>
-                                                <a class='mx-1 btn btn-primary btn-xs' data-toggle="modal"
-                                                    data-target="#modal-{{ $ticket->id }}">Ubah Harga</a>
-                                                <form action="/tickets/{{ $ticket->id }}" method="POST"
-                                                    onsubmit="return confirm('Yakin ingin menghapus?');">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button class='mx-1 btn btn-danger btn-xs'>Delete</button>
+                                                <div class="flex-row mb-3 d-flex bd-highlight">
+                                                    <a class='mx-1 btn btn-primary btn-sm' data-toggle="modal"
+                                                    data-target="#modal-{{ $ticket->id }}"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                        fill="currentColor" class="bi bi-pencil-square"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                    </svg>Ubah Harga</a>
+                                                    <form onsubmit="return confirmHapus(event)"
+                                                    action="/tracks/{{ $ticket->id  }}" method="POST">
+                                                    @csrf @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        <svg class="bi bi-trash-fill" width="1em" height="1em"
+                                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd"
+                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        HAPUS
+                                                    </button>
                                                 </form>
+                                       
+                                                </div>
                                             </td>
                                             @endcan
                                             <div class="modal fade" id="modal-{{ $ticket->id }}">
@@ -356,4 +374,27 @@
     </aside>
     <!-- /.control-sidebar -->
 </div>
+<script>
+    function confirmHapus(event) {
+        event.preventDefault(); // Menghentikan form dari pengiriman langsung
+
+        Swal.fire({
+            title: 'Yakin Hapus Data?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            theme: 'dark',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+        }).then((willDelete) => {
+            if (willDelete.isConfirmed) {
+                event.target.submit(); // Melanjutkan pengiriman form
+            } else {
+                swal('Your imaginary file is safe!');
+            }
+        });
+    }
+</script>
 @endsection

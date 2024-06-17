@@ -96,7 +96,7 @@
                                                                             Berangkat</label>
                                                                         <input type="text"
                                                                             class="col-sm-10 form-control"
-                                                                            name="flight_at"
+                                                                            name="jam_berangkat"
                                                                             placeholder="Masukkan Jam Berangkat (Jam:Menit:Detik)">
                                                                     </div>
                                                                 </div>
@@ -143,8 +143,8 @@
                                                         @endisset
                                                     </td>
                                                     <td>
-                                                        @isset($type->flight_at)
-                                                        {{ $type->flight_at }}
+                                                        @isset($type->jam_berangkat)
+                                                        {{ $type->jam_berangkat }}
                                                         @endisset
                                                     </td>
                                                    
@@ -198,9 +198,9 @@
                                                                                 Berangkat</label>
                                                                             <input type="date"
                                                                                 class="col-sm-10 form-control"
-                                                                                name="flight_at"
+                                                                                name="jam_berangkat"
                                                                                 placeholder="Masukkan Jam Berangkat (HH:MM:SS)"
-                                                                                value="{{ old('flight_at', $type->flight_at) }}">
+                                                                                value="{{ old('jam_berangkat', $type->jam_berangkat) }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">

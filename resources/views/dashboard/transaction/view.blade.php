@@ -6,19 +6,16 @@
     <!-- Navbar -->
     <x-front-dashboard-navbar></x-front-dashboard-navbar>
     <!-- /.Navbar -->
-
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="/dashboard" class="brand-link">
-            <img src="{{ asset('dist/img/TicBusLogo1.png') }}"width="50" alt="ticbus Logo">
+            <img src="{{ asset('dist/img/TicBusLogo1.png') }}" width="50" alt="ticbus Logo">
         </a>
         <!-- Sidebar Menu -->
         <x-front-sidemenu></x-front-sidemenu>
         <!-- /.sidebar Menu -->
     </aside>
-
-    
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -37,83 +34,79 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
 
 
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="card">
 
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered">
 
-                                <div class="card">
-                                   
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered">
+                                    <div>
+                                        <p>ID Transaksi: {{ $transaction->order->order_code}}</p>
+                                        <p>ID Order: {{ $transaction->order_id }}</p>
+                                        <p>nama User: {{Auth::user()->name}}</p>
+                                        <p>Email User: {{Auth::user()->email}}</p>
+                                        <p>Nomor Hp: {{Auth::user()->no_hp}}</p>
 
-                                            <div>
-                                                <p>ID Transaksi: {{ $transaction->order->order_code}}</p>
-                                                <p>ID Order: {{ $transaction->order_id }}</p>
-                                                <p>nama User: {{Auth::user()->name}}</p>
-                                                <p>Email User: {{Auth::user()->email}}</p>
-                                                <p>Nomor Hp: {{Auth::user()->no_hp}}</p>
-
-                                                <p>Total: {{ $transaction->total }}</p>
-                                                <p>Status:
-                                                    @if ($transaction->status == 'unpaid')
-                                                    Belum Bayar
-                                                    @else
-                                                    Sudah Bayar
-                                                    @endif
-                                                </p>
-                                                <!-- Anda bisa menampilkan data lainnya sesuai kebutuhan -->
-                                            </div>
-                                        </table>
-                                        <x-button id="pay-button">bayar</x-button>
+                                        <p>Total: {{ $transaction->total }}</p>
+                                        <p>Status:
+                                            @if ($transaction->status == 'unpaid')
+                                            Belum Bayar
+                                            @else
+                                            Sudah Bayar
+                                            @endif
+                                        </p>
+                                        <!-- Anda bisa menampilkan data lainnya sesuai kebutuhan -->
                                     </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
+                                </table>
+                                <button id="pay-button" type="button" class="btn btn-primary">Bayar</button>
                             </div>
-                            <!-- /.col -->
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.row -->
+                        <!-- /.card -->
                     </div>
-                    <!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
             </div>
-        </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
     </div>
-    <script type="text/javascript">
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function () {
-            window.snap.pay('{{$snapToken}}',
-                {
-
-                    onSuccess: function (result) {
-                        /* You may add your own implementation here */
-                        // alert("payment success!"); 
-                        window.location.href= '/print?order={{ $transaction->order->order_code}}'
-                        console.log(result);
-                    },
-                    onPending: function (result) {
-                        /* You may add your own implementation here */
-                        alert("wating your payment!"); console.log(result);
-                    },
-                    onError: function (result) {
-                        /* You may add your own implementation here */
-                        alert("payment failed!"); console.log(result);
-                    },
-                    onClose: function () {
-                        /* You may add your own implementation here */
-                        alert('you closed the popup without finishing the payment');
-                    }
+</div>
+</div>
+<script type="text/javascript">
+    var payButton = document.getElementById('pay-button');
+    payButton.addEventListener('click', function () {
+        window.snap.pay('{{$snapToken}}',
+            {
+                onSuccess: function (result) {
+                    /* You may add your own implementation here */
+                    alert("payment success!"); 
+                    console.log(result);
+                },
+                onPending: function (result) {
+                    /* You may add your own implementation here */
+                    alert("wating your payment!"); console.log(result);
+                },
+                onError: function (result) {
+                    /* You may add your own implementation here */
+                    alert("payment failed!"); console.log(result);
+                },
+                onClose: function () {
+                    /* You may add your own implementation here */
+                    alert('you closed the popup without finishing the payment');
                 }
-            );
-        });
-    </script>
+            }
+        );
+    });
+</script>
 
 </div>
 <!-- /.content-wrapper -->

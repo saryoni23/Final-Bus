@@ -10,7 +10,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="/dashboard" class="brand-link">
-            <img src="{{ asset('dist/img/TicBusLogo1.png') }}"width="50" alt="ticbus Logo">
+            <img src="{{ asset('dist/img/TicBusLogo1.png') }}" width="50" alt="ticbus Logo">
         </a>
 
         <!-- Sidebar Menu -->
@@ -166,8 +166,7 @@
                                             @can('isAdmin')
                                             <td>
 
-                                                <a href="https://wa.me/62{{ $order->user->no_hp}}"
-                                                    target="_blank">
+                                                <a href="https://wa.me/62{{ $order->user->no_hp}}" target="_blank">
                                                     <button class="btn btn-success btn-sm" type="button">Wa</button>
 
                                                 </a>
@@ -176,157 +175,186 @@
                                             @can('isKaryawan')
                                             <td>
 
-                                                <a href="https://wa.me/62{{ $order->user->no_hp}}"
-                                                    target="_blank">
+                                                <a href="https://wa.me/62{{ $order->user->no_hp}}" target="_blank">
                                                     <button class="btn btn-success btn-sm" type="button">Wa</button>
 
                                                 </a>
                                             </td>
                                             @endcan
-                                            <td class='flex-row items-center space-y-3'>
+                                            <td class='flex-row mb-3 d-flex bd-highlight'>
                                                 @can('isAdmin')
-                                                <a href="/print?order={{ $order->order_code }}" target="_blank">
-                                                    <button class="btn btn-primary btn-sm" type="button">Cetak</button>
+                                               
+                                                    <a href="/print?order={{ $order->order_code }}" target="_blank">
+                                                        <button class="btn btn-primary btn-sm"
+                                                            type="button">Cetak</button>
 
-                                                </a>
-                                                @else
-                                                @if ($order->transaction->status == 'paid')
-                                                <a href="/print?order={{ $order->order_code }}" target="_blank">
-                                                    <button class="btn btn-primary btn-sm" type="button">Cetak</button>
+                                                    </a>
+                                                    @else
+                                                    @if ($order->transaction->status == 'paid')
+                                                    <a href="/print?order={{ $order->order_code }}" target="_blank">
+                                                        <button class="btn btn-primary btn-sm"
+                                                            type="button">Cetak</button>
 
-                                                </a>
-                                                @endif
-                                                @endcan
+                                                    </a>
+                                                    @endif
+                                                    @endcan
 
-                                                @can('isCustomer')
-                                                @if ($order->transaction->status == false)
-                                                    <form onsubmit="return confirmHapus(event)" action="orders/{{ $order->id }}" method="POST">
+                                                    @can('isCustomer')
+                                                    @if ($order->transaction->status == 'unpaid')
+                                                    <form onsubmit="return confirmHapus(event)"
+                                                        action="orders/{{ $order->id }}" method="POST">
                                                         @csrf @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center">
-                                                            <svg class="mr-2 bi bi-trash" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M5.5 5.5a.5.5 0 01.5-.5H10a.5.5 0 01.5.5V6h3a.5.5 0 010 1h-1v9a2 2 0 01-2 2H6a2 2 0 01-2-2V7H3a.5.5 0 010-1h3v-.5zM7 8a.5.5 0 011 0v6a.5.5 0 01-1 0V8zm4 0a.5.5 0 011 0v6a.5.5 0 01-1 0V8zM4.5 2a.5.5 0 00-.5.5V3H2.5a.5.5 0 000 1H3v1h10V4h.5a.5.5 0 000-1H12v-.5a.5.5 0 00-.5-.5H4.5zm3 1a.5.5 0 000 1h1a.5.5 0 000-1h-1z" fill-rule="evenodd"></path>
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm d-inline-flex align-items-center">
+                                                            <svg class="mr-2 bi bi-trash" width="1em" height="1em"
+                                                                fill="currentColor" viewBox="0 0 16 16"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M5.5 5.5a.5.5 0 01.5-.5H10a.5.5 0 01.5.5V6h3a.5.5 0 010 1h-1v9a2 2 0 01-2 2H6a2 2 0 01-2-2V7H3a.5.5 0 010-1h3v-.5zM7 8a.5.5 0 011 0v6a.5.5 0 01-1 0V8zm4 0a.5.5 0 011 0v6a.5.5 0 01-1 0V8zM4.5 2a.5.5 0 00-.5.5V3H2.5a.5.5 0 000 1H3v1h10V4h.5a.5.5 0 000-1H12v-.5a.5.5 0 00-.5-.5H4.5zm3 1a.5.5 0 000 1h1a.5.5 0 000-1h-1z"
+                                                                    fill-rule="evenodd"></path>
                                                             </svg>
                                                             @can('is_admin')
-                                                                Hapus
+                                                            Hapus
                                                             @else
-                                                                Batal
+                                                            Batal
                                                             @endcan
                                                         </button>
                                                     </form>
-                                                @endif
-                                            @else
-                                                <form onsubmit="return confirmHapus(event)" action="orders/{{ $order->id }}" method="POST">
-                                                    @csrf @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center">
-                                                        <svg class="mr-2 bi bi-trash" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M5.5 5.5a.5.5 0 01.5-.5H10a.5.5 0 01.5.5V6h3a.5.5 0 010 1h-1v9a2 2 0 01-2 2H6a2 2 0 01-2-2V7H3a.5.5 0 010-1h3v-.5zM7 8a.5.5 0 011 0v6a.5.5 0 01-1 0V8zm4 0a.5.5 0 011 0v6a.5.5 0 01-1 0V8zM4.5 2a.5.5 0 00-.5.5V3H2.5a.5.5 0 000 1H3v1h10V4h.5a.5.5 0 000-1H12v-.5a.5.5 0 00-.5-.5H4.5zm3 1a.5.5 0 000 1h1a.5.5 0 000-1h-1z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                        @can('is_admin')
+                                                    @endif
+                                                    @else
+                                                    <form onsubmit="return confirmHapus(event)"
+                                                        action="orders/{{ $order->id }}" method="POST">
+                                                        @csrf @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm d-inline-flex align-items-center">
+                                                            <svg class="mr-2 bi bi-trash" width="1em" height="1em"
+                                                                fill="currentColor" viewBox="0 0 16 16"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M5.5 5.5a.5.5 0 01.5-.5H10a.5.5 0 01.5.5V6h3a.5.5 0 010 1h-1v9a2 2 0 01-2 2H6a2 2 0 01-2-2V7H3a.5.5 0 010-1h3v-.5zM7 8a.5.5 0 011 0v6a.5.5 0 01-1 0V8zm4 0a.5.5 0 011 0v6a.5.5 0 01-1 0V8zM4.5 2a.5.5 0 00-.5.5V3H2.5a.5.5 0 000 1H3v1h10V4h.5a.5.5 0 000-1H12v-.5a.5.5 0 00-.5-.5H4.5zm3 1a.5.5 0 000 1h1a.5.5 0 000-1h-1z"
+                                                                    fill-rule="evenodd"></path>
+                                                            </svg>
+                                                            @can('is_admin')
                                                             Hapus
-                                                        @else
+                                                            @else
                                                             Batal
+                                                            @endcan
+                                                        </button>
+                                                    </form>
+                                                    @endcan
+
+
+                                                    <style>
+                                                        .btn-custom-yellow {
+                                                            background-color: #facc15;
+                                                            /* Tailwind bg-yellow-400 */
+                                                            border-color: #facc15;
+                                                            color: white;
+                                                        }
+
+                                                        .btn-custom-yellow:hover {
+                                                            background-color: #854d0e;
+                                                            /* Tailwind hover:bg-yellow-800 */
+                                                            border-color: #854d0e;
+                                                        }
+
+                                                        .btn-custom-yellow:focus {
+                                                            box-shadow: 0 0 0 0.2rem rgba(250, 204, 21, 0.5);
+                                                            /* Tailwind focus:ring-yellow-300 */
+                                                        }
+
+                                                        .btn-custom-yellow-dark:focus {
+                                                            box-shadow: 0 0 0 0.2rem rgba(133, 77, 14, 0.5);
+                                                            /* Tailwind dark:focus:ring-yellow-900 */
+                                                        }
+                                                    </style>
+
+                                                    <button class="btn btn-custom-yellow btn-sm position-relative"
+                                                        type="button" data-toggle="modal"
+                                                        data-target="#modal-lapor-{{ $order->id }}"
+                                                        id="button-{{ $order->id }}">Lapor
+
+                                                        @can('isCustomer')
+                                                        @if ($order->complaints->where('seenForAdmin', 0)->count() != 0)
+                                                        <span
+                                                            class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger">
+                                                            {{ $order->complaints->where('seenForAdmin', 0)->count() }}
+                                                        </span>
+                                                        @endif
+                                                        @elsecan('isKaryawan')
+                                                        @if ($order->complaints->where('seenForKaryawan', 0)->count() !=
+                                                        0)
+                                                        <span
+                                                            class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger">
+                                                            {{ $order->complaints->where('seenForKaryawan', 0)->count()
+                                                            }}
+                                                        </span>
+                                                        @endif
+                                                        @else
+                                                        @if ($order->complaints->where('seen', 0)->count() != 0)
+                                                        <span
+                                                            class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger">
+                                                            {{ $order->complaints->where('seen', 0)->count() }}
+                                                        </span>
+                                                        @endif
                                                         @endcan
                                                     </button>
-                                                </form>
-                                            @endcan
-                                            
-
-                                                <style>
-                                                    .btn-custom-yellow {
-                                                        background-color: #facc15; /* Tailwind bg-yellow-400 */
-                                                        border-color: #facc15;
-                                                        color: white;
-                                                    }
-                                                    .btn-custom-yellow:hover {
-                                                        background-color: #854d0e; /* Tailwind hover:bg-yellow-800 */
-                                                        border-color: #854d0e;
-                                                    }
-                                                    .btn-custom-yellow:focus {
-                                                        box-shadow: 0 0 0 0.2rem rgba(250, 204, 21, 0.5); /* Tailwind focus:ring-yellow-300 */
-                                                    }
-                                                    .btn-custom-yellow-dark:focus {
-                                                        box-shadow: 0 0 0 0.2rem rgba(133, 77, 14, 0.5); /* Tailwind dark:focus:ring-yellow-900 */
-                                                    }
-                                                </style>
-                                                
-                                                <button
-                                                    class="btn btn-custom-yellow btn-sm position-relative"
-                                                    type="button"
-                                                    data-toggle="modal"
-                                                    data-target="#modal-lapor-{{ $order->id }}"
-                                                    id="button-{{ $order->id }}">Lapor
-                                                
-                                                    @can('isCustomer')
-                                                        @if ($order->complaints->where('seenForAdmin', 0)->count() != 0)
-                                                            <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                                                                {{ $order->complaints->where('seenForAdmin', 0)->count() }}
-                                                            </span>
-                                                        @endif
-                                                    @else
-                                                        @if ($order->complaints->where('seen', 0)->count() != 0)
-                                                            <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                                                                {{ $order->complaints->where('seen', 0)->count() }}
-                                                            </span>
-                                                        @endif
-                                                    @endcan
-                                                </button>
-                                                
 
 
-                                                <div class="modal fade" id="modal-lapor-{{ $order->id }}">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Form Pengaduan</h4>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
 
-                                                            <div class="modal-body d-flex flex-column">
-                                                                @foreach ($order->complaints as $complaint)
-                                                                <div
-                                                                    class="d-flex flex-row align-items-center mb-2 
+                                                    <div class="modal fade" id="modal-lapor-{{ $order->id }}">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Form Pengaduan</h4>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="modal-body d-flex flex-column">
+                                                                    @foreach ($order->complaints as $complaint)
+                                                                    <div
+                                                                        class="d-flex flex-row align-items-center mb-2 
                                                                     @if ($complaint->user->id == Auth::id()) justify-content-end @endif">
-                                                                    <!-- <img src="{{ $complaint->user->profile_photo_path }}"
-                                                                        alt="{{ $complaint->user->name }}"
-                                                                        style="max-width: 30px; max-height: 30px"
-                                                                        class="mx-2 rounded-circle"> -->
-                                                                    <label class="my-1">{{
-                                                                        $complaint->user->name }}</label>
-                                                                </div>
-                                                                <p
-                                                                    class="p-2 mx-2 mb-4 border rounded fw-normal">
-                                                                    {{ $complaint->body }}</p>
-                                                                @endforeach
-                                                            </div>
+                                                                        <img src="{{ $complaint->user->profile_photo_url }}"
+                                                                            alt="{{ $complaint->user->name }}"
+                                                                            style="max-width: 30px; max-height: 30px"
+                                                                            class="mx-2 rounded-circle">
 
-                                                            <form action="/complaints" method="POST">
-                                                                @csrf
-                                                                @method('POST')
-
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <label for="phone_number"
-                                                                            class="col-sm-3 col-form-label">Kirim
-                                                                            pesan
-                                                                            baru: </label>
-                                                                        <input type="text"
-                                                                            class="form-control col-sm-7"
-                                                                            name="body" required>
-                                                                        <input type="hidden" value={{ $order->id
-                                                                        }}
-                                                                        name="order_id">
-                                                                        <input type="submit"
-                                                                            class="btn btn-success col-sm-2"
-                                                                            name="submit" value="Submit" />
+                                                                        <label class="my-1">{{
+                                                                            $complaint->user->name }}</label>
                                                                     </div>
+                                                                    <p class="p-2 mx-2 mb-4 border rounded fw-normal">
+                                                                        {{ $complaint->body }}</p>
+                                                                    @endforeach
                                                                 </div>
-                                                            </form>
+
+                                                                <form action="/complaints" method="POST">
+                                                                    @csrf
+                                                                    @method('POST')
+
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <label for="no_hp"
+                                                                                class="col-sm-3 col-form-label">Kirim
+                                                                                pesan baru: </label>
+                                                                            <input type="text"
+                                                                                class="form-control col-sm-7"
+                                                                                name="body" required>
+                                                                            <input type="hidden" value={{ $order->id}}
+                                                                            name="order_id">
+                                                                            <input type="submit"
+                                                                                class="btn btn-success col-sm-2"
+                                                                                name="submit" value="Submit" />
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                
                                             </td>
                                         </tr>
                                         @endforeach
@@ -365,4 +393,27 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<script>
+    function confirmHapus(event) {
+        event.preventDefault(); // Menghentikan form dari pengiriman langsung
+
+        Swal.fire({
+            title: 'Yakin Hapus Data?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            theme: 'dark',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+        }).then((willDelete) => {
+            if (willDelete.isConfirmed) {
+                event.target.submit(); // Melanjutkan pengiriman form
+            } else {
+                swal('Your imaginary file is safe!');
+            }
+        });
+    }
+</script>
 @endsection

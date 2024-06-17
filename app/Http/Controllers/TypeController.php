@@ -39,7 +39,7 @@ class TypeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'min:3', 'max:50'],
-            'flight_at' => ['required']
+            'jam_berangkat' => ['required']
         ]);
 
         $check = Type::where('name', $validatedData['name'])->where('name', $validatedData['name'])->first();
@@ -86,7 +86,7 @@ class TypeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'min:3', 'max:50'],
-            'flight_at' => ['required']
+            'jam_berangkat' => ['required']
         ]);
 
         $check = Type::where('id', '!=', $type->id)->where('name', $validatedData['name'])->first();

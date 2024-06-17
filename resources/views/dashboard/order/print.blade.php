@@ -88,7 +88,7 @@
                             </td>
                             <td>{{ $order->ticket->price->kode_bus }}</td>
                             <td>{{ $order->go_date }}</td>
-                            <td>{{ $order->ticket->type->flight_at }} WIB</td>
+                            <td>{{ $order->ticket->type->jam_berangkat }} WIB</td>
                         </tr>
                         @endforeach
                     </tbody>

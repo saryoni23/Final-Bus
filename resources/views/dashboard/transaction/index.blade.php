@@ -93,34 +93,9 @@
                                                 @endif
                                             </td>
                                             <td>
-
-                                                <!-- @can('isAdmin')
-                                                @if ($transaction->status == 'unpaid')
-                                        
-                                                <button class="btn btn-primary btn-xs" type="button" data-toggle="modal"
-                                                    data-target="#modal-transaction-{{ $transaction->id }}">Perbaharui
-                                                    Status 
-                                                    
-                                                </button>
-                                                @else
-                                                Sudah Bayar
-                                                @endif
-                                                
-                                                @else -->
-                                                <!-- <button class="btn btn-primary btn-xs" type="button" data-toggle="modal"
-                                                    data-target="#modal-upload-{{ $transaction->id }}">Unggah
-                                                    Bukti Pembayaran
-                                                </button> -->
-                                                <!-- @if ($transaction->status == 'unpaid')
-                                                <a href='pay1/{{$transaction->id }}'>bayar
-                                                </a>
-                                                @else
-                                                Sudah Bayar
-                                                @endif
-                                                @endcan -->
                                                 @can('isAdmin')
                                                     @if ($transaction->status == 'unpaid')
-                                                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900" type="button" data-toggle="modal"
+                                                        <button class="btn btn-primary" type="button" data-toggle="modal"
                                                             data-target="#modal-transaction-{{ $transaction->id }}">Perbaharui Status
                                                         </button>
                                                     @else
@@ -239,18 +214,6 @@
                                                                 </ol>
                                                             </div>
 
-                                                            <!-- <div class="card card-body">
-                                                                <h5 style="font-weight: 700">Bukti Pembayaran
-                                                                </h5>
-                                                                @isset($transaction->image)
-                                                                <img style="width: 200px; height: 100px"
-                                                                    src="{{ asset($transaction->image) }}"
-                                                                    alt="{{ $transaction->order->order_code }}">
-                                                                @else
-                                                                <span class="alert alert-danger">Bukti
-                                                                    Pembayaran belum diunggah</span>
-                                                                @endisset
-                                                            </div> -->
 
                                                             <div class="input-group w-100">
 

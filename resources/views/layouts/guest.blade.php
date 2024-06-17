@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ darkMode: false }"
-    x-bind:class="{'dark' : darkMode === true}"
-    x-init="    if (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) {localStorage.setItem('darkMode', JSON.stringify(true));    }    darkMode = JSON.parse(localStorage.getItem('darkMode'));    $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
 
 <head>
     <meta charset="utf-8">
@@ -30,6 +27,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{config('midtrans.client.key')}}"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{config('midtrans.client.key')}}"></script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.js') }}"></script>
     <script src="{{ asset('plugins/select2/js/select2.full.js') }}"></script>
     <link href="{{ asset('plugins/select2/css/select2.css') }}" rel="stylesheet" />

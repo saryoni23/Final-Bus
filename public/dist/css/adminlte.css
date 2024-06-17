@@ -12625,12 +12625,12 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .user-panel .image {
   display: inline-block;
-  padding-left: 0.8rem;
+  padding-left: auto;
 }
 
 .user-panel img {
-  height: auto;
-  width: 2.1rem;
+  height: 200px;
+  width: 200px;
 }
 
 .user-panel .info {

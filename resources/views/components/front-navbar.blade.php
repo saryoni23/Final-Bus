@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="./"><img class="d-inline-block" src="images/Logo Ticbus.png" width="200"
+        <a class="navbar-brand" href="./"><img class="d-inline-block" src="images/auth/LogoTicbus.png" width="200"
                 alt="logo" /><span class="fw-bold text-primary ms-2"></span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,7 +8,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="ml-auto navbar-nav">
                 <li class="nav-item {{ Request::is('/') ? 'active ' : '' }}"><a href="/" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item {{ Request::is('about') ? 'active ' : '' }}"><a href="/about"

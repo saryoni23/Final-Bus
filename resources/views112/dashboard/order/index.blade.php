@@ -295,7 +295,7 @@
 
                                                                         <div class="modal-body">
                                                                             <div class="row">
-                                                                                <label for="phone_number"
+                                                                                <label for="no_hp"
                                                                                     class="col-sm-3 col-form-label">Kirim
                                                                                     pesan
                                                                                     baru: </label>

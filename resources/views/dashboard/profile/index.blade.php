@@ -80,8 +80,8 @@
                                 </p>
 
                                 <p class="text-center text-muted">
-                                    @if ($user->phone_number)
-                                    {{ $user->phone_number }} &#128383;
+                                    @if ($user->no_hp)
+                                    {{ $user->no_hp }} &#128383;
                                     @else
                                     Nomor telepon belum di set
                                     @endif
@@ -139,11 +139,11 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label for="phone_number" class="col-sm-2 col-form-label">Nomor
+                                                    <label for="no_hp" class="col-sm-2 col-form-label">Nomor
                                                         Telepon:</label>
                                                     <input type="text" class="form-control col-sm-10"
-                                                        value="{{ old('phone_number', $user->phone_number) }}"
-                                                        name="phone_number" required>
+                                                        value="{{ old('no_hp', $user->no_hp) }}"
+                                                        name="no_hp" required>
                                                 </div>
 
                                                 <div class="form-group row">

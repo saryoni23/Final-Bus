@@ -98,7 +98,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
 
 Route::get('/pay1/{id}', [TransactionController::class,'pay1'])->middleware(['auth', 'verified']);
-
 Route::post('/uprole/{id}',     [UserController::class, 'uprole']);
 Route::post('/downrole/{id}',     [UserController::class, 'downrole']);
 

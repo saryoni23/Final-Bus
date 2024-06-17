@@ -167,16 +167,6 @@ class TransactionController extends Controller
     }
     public function pay1($id)
     {
-            /*Install Midtrans PHP Library (https://github.com/Midtrans/midtrans-php)
-        composer require midtrans/midtrans-php
-                                    
-        Alternatively, if you are not using **Composer**, you can download midtrans-php library 
-        (https://github.com/Midtrans/midtrans-php/archive/master.zip), and then require 
-        the file manually.   
-
-        require_once dirname(__FILE__) . '/pathofproject/Midtrans.php'; */
-
-        //SAMPLE REQUEST START HERE
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
@@ -186,32 +176,35 @@ class TransactionController extends Controller
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
+        //Override Notification URL
+        \Midtrans\Config::$overrideNotifUrl = config('app.url').'/api/midtrans-callback';
 
         $transaction = Transaction::findOrFail($id); 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $transaction->order_id ,
+                'order_id' => $transaction->id_order,
                 'gross_amount' => $transaction->total,
             ),
             'customer_details' => array(
-                'name'  => Auth::user()->name,
+                'first_name'    => Auth::user()->name,
+                'last_name'     => '',
                 'email' => Auth::user()->email,
                 'phone' => Auth::user()->no_hp,
             ),
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
+        #return dd($snapToken);
         return view('dashboard.transaction.view', ['snapToken'=>$snapToken,'transaction' => $transaction]);
 
-        
     }
     public function callback(Request $request){
         $serverKey   = config('midtrans.server_key');
         $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
         if($hashed== $request->signature_key){
-            if($request->transaction_status == 'capture'){
-                $order = Transaction::find($request->order_id);
-                $order->update(['status'=>'Paid']);
+            if($request->transaction_status =='capture' or $request->transaction_status == 'settlement'){
+                $order = Transaction::find($request->id);
+                $order->update(['status'=>'paid']);
             }
         }
     }

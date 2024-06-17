@@ -99,10 +99,10 @@ class UserController extends Controller
        
 
         if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('public_profiles');
+            $validatedData['image'] = $request->file('image')->store('profile_photo_url');
             $image = $request->file('image');
             $input['imageName'] = $validatedData['image'];
-            $destinationPath = public_path('/public_profiles');
+            $destinationPath = public_path('/profile_photo_url');
             $image->move($destinationPath, $input['imageName']);
         }
 
