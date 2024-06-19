@@ -1,7 +1,9 @@
 <?php
 
 
-use App\Http\Controllers\TransactionController;
+
+use App\Http\Controllers\Api\TransactionApiController;
+use App\Http\Controllers\Api\UserApiController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -11,4 +13,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::post('/midtrans-callback', [TransactionController::class, 'callback']);
+Route::post('/midtrans-callback', [App\Http\Controllers\Api\TransactionController::class, 'callback']);
+Route::apiResource('/posts', TransactionApiController::class,array('as'=>'api'));
+Route::apiResource('users', UserApiController::class,array('as'=>'api'));
